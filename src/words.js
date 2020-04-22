@@ -247,8 +247,8 @@ class Words {
     }
 
     newWord() {
-        randNum = Math.floor(Math.random() * this.length);
-        randWord = this.words[randNum];
+        let randNum = Math.floor(Math.random() * this.length);
+        let randWord = this.words[randNum];
         return randWord
     }
 }

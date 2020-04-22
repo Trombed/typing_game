@@ -33,10 +33,11 @@
 }
 
 #user-input {
+    margin-top: -25px;
     position: absolute; 
     top: 0;
     left: 100;
-    width : 400px;
+    width : 300px;
     text-align: center;
     line-height: 50px;
     background-color: #fff;
@@ -47,6 +48,7 @@
     -webkit-box-shadow: 2px 2px 4px #888;
     -moz-box-shadow: 2px 2px 4px #888;
     box-shadow: 2px 2px 4px #888;
+    font-size: 20px;
     outline: none;
 }
 
@@ -58,6 +60,7 @@
     left: 30px;
     top: 200px;
     border: 25px solid;
+    
     border-color: #666 transparent transparent #666;
   }
   
