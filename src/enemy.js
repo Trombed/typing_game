@@ -5,15 +5,17 @@ class Enemy {
         this.canvas = canvas;
         this.word = word;
         this.length = this.word.length;
-        this.x = this.spawnX();
-        this.y = 600;
+        this.y = this.spawnY();
+        this.x = 800;
         this.image = new Image ();
         this.image.src = "./images/enemy.png";
         this.shift = 0
+
+       
     }
 
-    spawnX() {
-        let num = Math.random() * this.canvas.width
+    spawnY() {
+        let num = Math.random() * this.canvas.height
         if (num > 550 && num ) {
             num -= 80;
         }
@@ -21,7 +23,7 @@ class Enemy {
     }
 
     drawWord () {
-        this.y -= 1
+        this.x -= 1
         this.ctx.fillStyle = "black";
         this.ctx.font = "16px Arial"
         this.ctx.fillText(this.word, this.x, this.y)
@@ -31,10 +33,10 @@ class Enemy {
     }
 
     drawEnemy() {
-        this.ctx.drawImage(this.image, this.shift, 310,
+        this.ctx.drawImage(this.image, this.shift, 100,
            50, 100,
            this.x+10, this.y,
-           40, 85)
+           30, 45)
     }
 
     changeFrames() {
@@ -48,6 +50,8 @@ class Enemy {
         this.drawWord();
         this.drawEnemy();
     }
+
+
 }
 
 export default Enemy;

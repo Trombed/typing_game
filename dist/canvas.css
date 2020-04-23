@@ -30,7 +30,7 @@
 
 #game-canvas {
 
-    border: 0px solid black;
+    border: 1px solid black;
 }
 
 
@@ -39,9 +39,9 @@
     z-index: 10;
     margin-top: -25px;
     position: absolute; 
-    top: 0;
-    left: 100;
-    width : 300px;
+    top: 300;
+    left: 0;
+    width : 100px;
     text-align: center;
     line-height: 10px;
     background-color: #fff;
