@@ -7,7 +7,6 @@ class Game {
         this.ctx = ctx;
         this.canvas = canvas;
         this.input = input;
-
         this.gameOver = false;
         this.enemies = []
         this.words = new Words();
@@ -15,6 +14,10 @@ class Game {
         this.heart = new Image ();
         this.heart.src = "./images/heart.png";
         this.startGame = this.startGame.bind(this)
+        this.wave = 1;
+        this.wpmTime = new Date();
+        this.wordsEntered = 0;
+        this.wpm = 0;
     }
 
 
@@ -37,7 +40,8 @@ class Game {
         this.drawEnemies();
         this.checkInput();
         this.showHealth();
-       
+        this.drawMenu();
+        this.drawWPM();
     }
 
 
@@ -58,6 +62,7 @@ class Game {
             if (this.input.value.toUpperCase() === this.enemies[i].word) {
                 this.enemies.splice(this.enemies[i],1)
                 this.input.value = "";
+                this.wordsEntered += 1;
                 this.spawnEnemy();
             }
         }
@@ -67,14 +72,39 @@ class Game {
         let x = 10
         for (let i = 0; i < this.health; i++ ) {
             // debugger
-            this.ctx.drawImage(this.heart, x, 5, 50, 50 );
-            x += 55;
+            this.ctx.drawImage(this.heart, x, 5, 30, 30 );
+            x += 35;
         }
     }
 
-    
+    drawMenu() {
+        this.ctx.beginPath();
+        this.ctx.moveTo(420, 0);
+        this.ctx.lineTo(400, 20);
+        this.ctx.lineTo(380, 0);
+        this.ctx.closePath();
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeStyle = '#666';
+        this.ctx.stroke();
+        this.ctx.fillText(`Wave: ${this.wave}`, 600, 20)
+        this.ctx.fillStyle = "#666";
+        this.ctx.fill();
+    }
+
+    drawWPM() {
+        let now = new Date();
+        const diff = now - this.wpmTime
+        this.wpm = Math.floor(this.wordsEntered / ( (diff / 1000) /  60))
+        this.ctx.stroke();
+        this.ctx.fillText(`WPM: ${this.wpm}`, 600, 40)
+        this.ctx.fill();       
+    }
 
 
+
+    gameOver() {
+
+    }
 }
 
 export default Game; 
