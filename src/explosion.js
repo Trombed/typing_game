@@ -1,16 +1,36 @@
+
 class Explosion {
-    constructor(ctx, canvas) {
+    constructor (ctx, canvas, x, y) {
         this.ctx = ctx;
-        this.canvas = canvas; 
-        this.drawSplash();
+        this.canvas = canvas;
+        this.x = x;
+        this.y = y;
+        this.shift = 0;
+        this.explosion = new Image ();
+        this.explosion.src = "./images/explosion.png"
+        this.finished = false;
+       
     }
 
-    drawSplash() {
-            this.ctx.fillStyle = "black";
-            this.ctx.font = '30px Tangerine';
-            this.ctx.alignText = "left";
-            this.ctx.fillText("Typing of the Wizard", this.canvas.width /2,this.canvas.height /2);
+
+
+    drawExplosion() {
+        this.ctx.drawImage(this.explosion, this.shift, 0, 128, 128, this.x-10, this.y-10, 128, 128);
     }
+
+    changeFrames() {
+        this.shift += 128;
+        if (this.shift > 1500) {
+            this.shift = 0;
+            this.finished = true;
+        }
+    }
+
+    draw() {
+        this.drawExplosion();
+    }
+
+
 }
 
-export default Explosion
+export default Explosion;

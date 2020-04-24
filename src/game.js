@@ -1,6 +1,7 @@
 import Words from "./words";
 import Enemy from "./enemy";
 import Mage from "./mage";
+import Explosion from "./explosion";
 
 
 class Game {
@@ -17,8 +18,7 @@ class Game {
         this.player = new Mage(this.ctx, this.canvas);
         this.heart.src = "./images/heart.png";
         this.startGame = this.startGame.bind(this)
-        this.explosion = new Image ();
-        this.explosion.src = "./images/explosion.png"
+    
         this.background = new Image();
         this.background.src = "./images/background.png"
         this.wave = 1;
@@ -27,7 +27,6 @@ class Game {
         this.wpm = 0;
         this.timer = 0;
 
-        this.drawExplosion = this.drawExplosion.bind(this)
 
     }
 
@@ -37,7 +36,8 @@ class Game {
         let input = document.getElementById("user-input");
         input.classList.toggle("hide")
         
-        this.currentFrame = new Date()
+        this.currentFrame = new Date();
+        this.explosionFrame = new Date();
         this.animate();
         this.input.focus();
        
@@ -45,7 +45,6 @@ class Game {
 
     spawnEnemy() {
         if (  (this.timer %  100) === 0 ) {
-            console.log("true")
             this.enemies.push(new Enemy(this.ctx, this.canvas, this.words.newWord()))
         }
     }
@@ -56,6 +55,7 @@ class Game {
         this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
         this.drawBG();
         this.drawEnemies();
+        this.drawExplosions();
         this.checkOOB();
         this.checkInput();
         this.showHealth();
@@ -63,18 +63,37 @@ class Game {
         this.drawWPM();
         this.spawnEnemy();
         this.player.draw();
+
+        // if (this.health <= 0) {
+        //     cancelAnimationFrame(this.render)
+        // }
      
     }
 
 
     drawEnemies() {
         let now = new Date();
-        let step = now - this.currentFrame
+        let step = now - this.currentFrame;
         for (let i = 0; i < this.enemies.length; i++) {
             this.enemies[i].draw();
             if (step > 200) {
                 this.enemies[i].changeFrames();
                 this.currentFrame = new Date();
+            }
+        }
+    }
+
+    drawExplosions() {
+        let now = new Date();
+        let step = now - this.explosionFrame;
+        for (let i = 0; i < this.explosion.length; i++) {
+            this.explosion[i].draw();
+            if (step > 200) {
+                this.explosion[i].changeFrames();
+                this.currentFrame = new Date();
+            }
+            if (this.explosion[i].finished) {
+                this.explosion.splice(i, 1)
             }
         }
     }
@@ -88,15 +107,12 @@ class Game {
         }
     }
 
+
     checkInput() {
         for (let i = 0; i < this.enemies.length; i++) {
             if (this.input.value.toUpperCase() === this.enemies[i].word) {
-                this.drawExplosion(this.enemies[i].x, this.enemies[i].y)
-                console.log(this.enemies)
-                
+                this.explosion.push(new Explosion(this.ctx, this.canvas, this.enemies[i].x, this.enemies[i].y ))         
                 this.enemies.splice(i,1)
-                // delete this.enemies[i]
-                console.log(this.enemies)
                 this.input.value = "";
                 this.wordsEntered += 1;
             }
@@ -121,7 +137,7 @@ class Game {
         this.ctx.lineWidth = 1;
         this.ctx.strokeStyle = '#666';
         this.ctx.stroke();
-        this.ctx.fillText(`Wave: ${this.wave}`, 600, 20)
+        this.ctx.fillText(`Kills: ${this.wordsEntered}`, 600, 20)
         this.ctx.fillStyle = "#666";
         this.ctx.fill();
     }
@@ -135,13 +151,7 @@ class Game {
         this.ctx.fill();       
     }
 
-    drawExplosion(x, y) {
-       
-        
-        for(var shift = 0; shift <= 1536; shift += 128 ) {
-            this.ctx.drawImage(this.explosion, shift, 0, 128, 128, x, y, 128, 128);
-        }
-    }
+    
     
     drawBG() {
         this.ctx.drawImage(this.background, 0,0, this.background.width, this.background.height,
@@ -155,3 +165,4 @@ class Game {
 }
 
 export default Game; 
+

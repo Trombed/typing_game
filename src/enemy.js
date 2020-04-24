@@ -9,26 +9,29 @@ class Enemy {
         this.x = 800;
         this.image = new Image ();
         this.image.src = "./images/enemy.png";
-        this.shift = 0
+        this.shift = 0;
+        this.explosion = new Image ();
+        this.explosion.src = "./images/explosion.png"
 
        
     }
 
     spawnY() {
         let num = Math.random() * this.canvas.height
-        if (num > 550 && num ) {
+        if (num > 350 && num ) {
             num -= 80;
+        } else if ( num < 20 ) {
+            num += 50;
         }
         return num;
     }
 
     drawWord () {
         this.x -= 1
-        this.ctx.fillStyle = "black";
+        this.ctx.fillStyle = "purple";
         this.ctx.font = "16px Arial"
         this.ctx.fillText(this.word, this.x, this.y)
         this.ctx.beginPath()
-        this.ctx.rect(this.x - 2, this.y + 4, this.length * 12, -22)
         this.ctx.stroke();
     }
 
