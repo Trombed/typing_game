@@ -1,11 +1,12 @@
 /* front page styling starts  */
 .Main {
+  
     position: relative; 
     /* padding-top: 10px;  */
     display: flex;
     justify-content: center;
     align-items: center; 
-    background-color: white; 
+    background-color: black; 
     flex-direction: column;
     margin-top: 50px;
 }
@@ -39,7 +40,7 @@
     z-index: 10;
     margin-top: -25px;
     position: absolute; 
-    top: 300;
+    top: 200px;
     left: 0;
     width : 100px;
     text-align: center;
@@ -56,6 +57,43 @@
     outline: none;
 }
 
+.Word-List-Container {
+    margin-top: 1px;
+    width: 800px;
+    height: 200px;
+    border: solid 1px #424542;
+    box-shadow: 1px 1px #e7dfe7,
+                -1px -1px #e7dfe7,
+                1px -1px #e7dfe7,
+                -1px 1px #e7dfe7,
+                0 -2px #9c9a9c,
+                -2px 0 #7b757b,
+                0 2px #424542;
+    border-radius: 8px;
+    background-color: #04009d;
+    font-family: Verdana, sans-serif;
+    background: -moz-linear-gradient(top,  #04009d 0%, #06004d 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#04009d), color-stop(100%,#06004d));
+  background: -webkit-linear-gradient(top,  #04009d 0%,#06004d 100%);
+  background: -o-linear-gradient(top,  #04009d 0%,#06004d 100%);
+  background: -ms-linear-gradient(top,  #04009d 0%,#06004d 100%);
+  background: linear-gradient(to bottom,  #04009d 0%,#06004d 100%);
+}
+
+.Word-List {
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+
+.enemies-word {
+    font-family: Verdana, sans-serif;
+    color: white;
+    display: inline;
+    padding: 2px; 
+}
 
 
 .hide {

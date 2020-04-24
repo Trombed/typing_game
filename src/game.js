@@ -5,10 +5,11 @@ import Explosion from "./explosion";
 
 
 class Game {
-    constructor(ctx, canvas, input) {
+    constructor(ctx, canvas, wordBox, input) {
         this.ctx = ctx;
         this.canvas = canvas;
         this.input = input;
+        this.wordBox = wordBox;
         this.gameOver = false;
         this.enemies = [];
         this.explosion = [];
@@ -47,6 +48,8 @@ class Game {
         if (  (this.timer %  100) === 0 ) {
             this.enemies.push(new Enemy(this.ctx, this.canvas, this.words.newWord()))
         }
+
+        this.updateWord();
     }
 
     animate() {
@@ -156,6 +159,16 @@ class Game {
     drawBG() {
         this.ctx.drawImage(this.background, 0,0, this.background.width, this.background.height,
             0,0, this.canvas.width, this.canvas.height)
+    }
+
+    updateWord() {
+        this.wordBox.innerHTML = "";
+        for (let i = 0; i < this.enemies.length; i++) {
+            let newDiv = document.createElement("div")
+            newDiv.classList.add("enemies-word")
+            newDiv.innerHTML = this.enemies[i].word
+            this.wordBox.append(newDiv)
+        }
     }
 
     gameOver() {
