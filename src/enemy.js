@@ -12,17 +12,13 @@ class Enemy {
         this.shift = 0;
         this.explosion = new Image ();
         this.explosion.src = "./images/explosion.png"
-
+        console.log(this.y)
        
     }
 
     spawnY() {
-        let num = Math.random() * this.canvas.height
-        if (num > 350 && num ) {
-            num -= 80;
-        } else if ( num < 20 ) {
-            num += 50;
-        }
+        let num = (Math.random() * (340-200)) + 200
+       
         return num;
     }
 

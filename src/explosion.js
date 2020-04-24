@@ -15,7 +15,7 @@ class Explosion {
 
 
     drawExplosion() {
-        this.ctx.drawImage(this.explosion, this.shift, 0, 128, 128, this.x-10, this.y-10, 128, 128);
+        this.ctx.drawImage(this.explosion, this.shift, 0, 128, 128, this.x-30, this.y-30, 128, 128);
     }
 
     changeFrames() {

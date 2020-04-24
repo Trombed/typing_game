@@ -19,7 +19,7 @@ class Game {
         this.player = new Mage(this.ctx, this.canvas);
         this.heart.src = "./images/heart.png";
         this.startGame = this.startGame.bind(this)
-    
+        
         this.background = new Image();
         this.background.src = "./images/background.png"
         this.wave = 1;
@@ -27,7 +27,7 @@ class Game {
         this.wordsEntered = 0;
         this.wpm = 0;
         this.timer = 0;
-
+        this.slashSound = new Audio("./sound/a4swordslash.mp3")
 
     }
 
@@ -36,12 +36,11 @@ class Game {
         this.canvas.removeEventListener("click", this.startGame)
         let input = document.getElementById("user-input");
         input.classList.toggle("hide")
-        
         this.currentFrame = new Date();
         this.explosionFrame = new Date();
+        this.playerFrame = new Date();
         this.animate();
         this.input.focus();
-       
     }
 
     spawnEnemy() {
@@ -65,7 +64,7 @@ class Game {
         this.drawMenu();
         this.drawWPM();
         this.spawnEnemy();
-        this.player.draw();
+        this.drawPlayer();
 
         // if (this.health <= 0) {
         //     cancelAnimationFrame(this.render)
@@ -84,6 +83,16 @@ class Game {
                 this.currentFrame = new Date();
             }
         }
+    }
+
+    drawPlayer() {
+        let now = new Date();
+        let step = now - this.playerFrame;
+        this.player.draw();
+            if (step > 500) {
+                this.player.changeFrames();
+                this.playerFrame = new Date();
+            }
     }
 
     drawExplosions() {
@@ -106,6 +115,7 @@ class Game {
             if (this.enemies[i].x < 100) {
                 this.enemies.splice(i, 1)
                 this.health -= 1;
+                // this.slashSound.play();
             }
         }
     }

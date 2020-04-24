@@ -1,4 +1,3 @@
-
 class Mage {
     constructor (ctx, canvas) {
         this.ctx = ctx;
@@ -8,23 +7,23 @@ class Mage {
         this.x = 5;
         this.image = new Image ();
         this.image.src = "./images/mage.png";
-        this.shift = 190;
+        this.shift = 142;
     }
 
 
     drawMage () {
        this.ctx.drawImage(this.image, this.shift, 
-            0, 100, 50,
+            0, 50, 50,
             this.x, this.y,
-            100, 60)
+            60, 60)
     }
 
 
 
     changeFrames() {
-        this.shift += 80;
+        this.shift += 50;
         if (this.shift > 200) {
-            this.shift = 0;
+            this.shift = 142;
         }
     }
 
