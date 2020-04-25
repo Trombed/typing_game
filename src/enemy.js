@@ -1,6 +1,6 @@
 
 class Enemy {
-    constructor (ctx, canvas, word) {
+    constructor (ctx, canvas, word, speed) {
         this.ctx = ctx;
         this.canvas = canvas;
         this.word = word;
@@ -8,7 +8,7 @@ class Enemy {
         this.image = new Image ();
         this.y = this.spawnY();
         this.x = 800;
-       
+        this.speedLevel = speed
 
         this.shift = 0;
        
@@ -27,12 +27,13 @@ class Enemy {
     }
 
     drawWord () {
-        this.x -= 1
-        this.ctx.fillStyle = "purple";
-        this.ctx.font = "16px Arial"
+        this.x -= this.speedLevel
+        this.ctx.font = "16px VERDANA"
+        this.ctx.strokeStyle = "green";
+        this.ctx.strokeWidth = 2;
+        this.ctx.strokeText(this.word, this.x, this.y)
+        this.ctx.fillStyle = "red";
         this.ctx.fillText(this.word, this.x, this.y)
-        this.ctx.beginPath()
-        this.ctx.stroke();
     }
 
     drawEnemy() {

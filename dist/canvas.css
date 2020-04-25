@@ -120,7 +120,7 @@
 .Info {
     display: flex;
     flex-direction: column;
-    padding: 5px;
+    padding: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 16px;
     outline: none;
@@ -131,6 +131,12 @@
 .enemies-word {
     font-family: Verdana, sans-serif;
     color: white;
+    display: inline;
+    padding: 2px; 
+}
+.enemies-word-flying {
+    font-family: Verdana, sans-serif;
+    color: red;
     display: inline;
     padding: 2px; 
 }
@@ -150,6 +156,7 @@
 }
 
 .Game-Over-Container {
+
     position: absolute;
     height: 400px;
     width: 800px; 
@@ -163,6 +170,7 @@
 
 
 .Restart {
+    padding: 5px;
     position: absolute; 
     top: 110px;
     left: 200px;

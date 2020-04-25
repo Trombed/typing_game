@@ -16,30 +16,38 @@ class Game {
         this.killsBox = killsBox;
         this.wpmBox = wpmBox;
         this.gameOver = false;
-        this.enemies = [];
-        this.explosion = [];
+        this.level = 1
         this.words = new Words();
-        this.health = 3;
+        
         this.player = new Mage(this.ctx, this.canvas);
         this.startGame = this.startGame.bind(this)
         this.background = new Image();
         this.background.src = "./images/background.png"
         this.wpmTime = new Date();
-        this.wordsEntered = 0;
-        this.wpm = 0;
-        this.timer = 0;
+   
         this.slashSound = new Audio("./sound/a4swordslash.mp3");
         this.gameOvered = this.gameOvered.bind(this);
+        this.restartGame = this.restartGame.bind(this)
+        this.newGame = this.newGame.bind(this)
+        this.selector = new Image();
+        this.selector.src = "./images/static_cursor.png"
 
     }
-
+    
 
     startGame() {
         this.canvas.removeEventListener("click", this.startGame)
-        // let input = document.getElementById("user-input");
         this.input.classList.toggle("hide")
         this.cursor.classList.toggle("hide")
         this.infoBox.classList.toggle("hide")
+        this.wordsEntered = 0;
+        this.speed = 1
+        this.wpm = 0;
+        this.timer = 0;
+        this.enemies = [];
+        this.explosion = [];
+        this.health = 3;
+        this.showHealth();
         this.currentFrame = new Date();
         this.explosionFrame = new Date();
         this.playerFrame = new Date();
@@ -50,7 +58,7 @@ class Game {
 
     spawnEnemy() {
         if (  (this.timer %  100) === 0 ) {
-            this.enemies.push(new Enemy(this.ctx, this.canvas, this.words.newWord()))
+            this.enemies.push(new Enemy(this.ctx, this.canvas, this.words.newWord(), this.speed))
         }
 
         this.updateWord();
@@ -67,12 +75,24 @@ class Game {
         this.checkInput();
         this.spawnEnemy();
         this.drawPlayer();
-
-        if (this.health <= 3) {
+        this.select();
+        if (this.health <= 1) {
             this.gameOvered();
             cancelAnimationFrame(this.render);
         }
      
+    }
+
+    select() {
+        for (let i = 0; i < this.enemies.length; i++) {
+            if (this.input.value.toUpperCase().startsWith(this.enemies[i].word) ) {
+                console.log("true")
+                this.ctx.drawImage(this.selector, 
+                    this.enemies[i].x, this.enemies[i].y+20
+                    
+                    )   
+            }
+        }
     }
 
 
@@ -144,8 +164,18 @@ class Game {
                 this.wordsEntered += 1;
                 this.updateKill();
                 this.updateWPM();
+                if (this.wordsEntered % 10 === 0) this.updateLevel();
             }
         }
+    }
+
+    updateLevel() {
+        this.level += 1;
+        this.speed += 0.5
+        for(let i = 0; i < this.enemies.length; i++) {
+            this.enemies[i].speedLevel = this.speed;
+        }
+        document.getElementById("LEVEL").innerHTML = this.level
     }
 
     updateKill() {
@@ -178,7 +208,11 @@ class Game {
         this.wordBox.innerHTML = "";
         for (let i = 0; i < this.enemies.length; i++) {
             let newDiv = document.createElement("div")
-            newDiv.classList.add("enemies-word")
+                if (this.enemies[i].flying) {
+                    newDiv.classList.add("enemies-word-flying")
+                } else { 
+                newDiv.classList.add("enemies-word")
+                }
             newDiv.innerHTML = this.enemies[i].word
             this.wordBox.append(newDiv)
         }
@@ -190,10 +224,28 @@ class Game {
         this.input.classList.toggle("hide")
         this.wordBox.classList.toggle("hide")
         document.getElementById("Game-Over").classList.toggle("hide")
+
+        document.addEventListener("keydown", this.newGame)
+
     }
 
     restartGame() {
+      
+  
+        document.getElementById("Game-Over").classList.toggle("hide");
+        this.wordBox.classList.toggle("hide")
+        this.infoBox.classList.toggle("hide")
+        this.startGame();
+    }
 
+    newGame(e) {
+        document.removeEventListener("keydown", this.newGame)
+        e.preventDefault();
+        if (e.code === "Enter")
+        { 
+
+        this.restartGame()
+        }
     }
 
 }

@@ -20,4 +20,5 @@ document.addEventListener("DOMContentLoaded", () => {
   
     
     canvas.addEventListener("click", game.startGame)
+    
   });
