@@ -67,8 +67,6 @@
 
 .Word-List-Container {
     margin-top: 1px;
-    width: 800px;
-    height: 200px;
     border: solid 1px #424542;
     box-shadow: 1px 1px #e7dfe7,
                 -1px -1px #e7dfe7,
@@ -87,12 +85,46 @@
     background: -ms-linear-gradient(top,  #04009d 0%,#06004d 100%);
     background: linear-gradient(to bottom,  #04009d 0%,#06004d 100%);
 }
+.Menu {
+    display: flex;
+    flex-direction: row;
+}
+
+.Menu-Row {
+    display: flex;
+    flex-direction: row;
+}
+
+.Right-Side {
+    width: 600px;
+    height: 100px;
+}
+
+.Menu-Name {
+    width: 40%;
+}
+
+.Left-Side {
+    width: 200px;
+    height: 100px;
+    margin-right: 5px;
+}
 
 .Word-List {
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
 
+}
+
+.Info {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    outline: none;
+    color: white; 
 }
 
 

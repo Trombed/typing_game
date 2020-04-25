@@ -16,15 +16,36 @@
     
     
     <div class="Main">
-        <canvas id='game-canvas' height="400" width="900"> </canvas>
+        <canvas id='game-canvas' height="400" width="800"> </canvas>
    
         <input id="user-input" class="hide speech-bubble">
         </input>
-        <img src="images/cursor.gif" class="cursor">
+        <img src="images/cursor.gif" class="cursor hide" id="cursor">
 </div>
-    <div class="Word-List-Container" > 
-        <div class="Word-List" id="Words">
+    <div class="Menu">
+        <div class="Word-List-Container Left-Side" >   
+            <div class="Info hide" id="Info">
+                <div class="Menu-Row">
+                    <div class="Menu-Name">HP</div>
+                    <div id="HP">3 / 3</div>
+                    
+                </div>
 
+                <div class="Menu-Row">
+                        <div class="Menu-Name">KILLS</div>
+                        <div id="KILLS">0</div>
+                </div>
+
+                <div class="Menu-Row">
+                        <div class="Menu-Name">WPM</div>
+                        <div id="WPM">0</div>
+                </div>
+            </div>
+        </div>
+        <div class="Word-List-Container Right-Side" >   
+            <div class="Word-List" id="Words">
+                
+            </div>
         </div>
     </div>
     <div class="Icons">

@@ -8,6 +8,7 @@ class Mage {
         this.image = new Image ();
         this.image.src = "./images/mage.png";
         this.shift = 142;
+        this.chantingShift = 90;
     }
 
 
@@ -30,6 +31,25 @@ class Mage {
     draw() {
         this.drawMage();
     }
+
+    drawChant() {
+        this.drawChanting();
+    }
+
+    drawChanting () {
+        this.ctx.drawImage(this.image, this.chantingShift, 
+             50, 50, 50,
+             this.x, this.y,
+             60, 60)
+     }
+
+     changeChantingFrames() {
+        this.chantingShift += 48;
+        if (this.chantingShift > 180) {
+            this.chantingShift = 90;
+        }
+    }
+ 
 
 
 }

@@ -9,7 +9,8 @@ class Explosion {
         this.explosion = new Image ();
         this.explosion.src = "./images/explosion.png"
         this.finished = false;
-       
+        this.effect = new Image();
+        this.effect.src = "./images/effect.png"
     }
 
 
@@ -17,6 +18,8 @@ class Explosion {
     drawExplosion() {
         this.ctx.drawImage(this.explosion, this.shift, 0, 128, 128, this.x-30, this.y-30, 128, 128);
     }
+
+
 
     changeFrames() {
         this.shift += 128;

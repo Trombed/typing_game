@@ -5,20 +5,24 @@ class Enemy {
         this.canvas = canvas;
         this.word = word;
         this.length = this.word.length;
+        this.image = new Image ();
         this.y = this.spawnY();
         this.x = 800;
-        this.image = new Image ();
-        this.image.src = "./images/enemy.png";
+       
+
         this.shift = 0;
-        this.explosion = new Image ();
-        this.explosion.src = "./images/explosion.png"
-        console.log(this.y)
        
     }
 
     spawnY() {
-        let num = (Math.random() * (340-200)) + 200
-       
+        let num = (Math.random() * (400)) 
+        if ( num < 150 ) {
+            this.image.src = "./images/flying.png";
+            this.flying = true;
+        } else  {
+            this.image.src = "./images/enemy.png";
+            this.flying = false;
+        }
         return num;
     }
 
@@ -32,16 +36,31 @@ class Enemy {
     }
 
     drawEnemy() {
+        if (!this.flying)
         this.ctx.drawImage(this.image, this.shift, 100,
            50, 100,
            this.x+10, this.y,
-           30, 45)
+           30, 45);
+        else {
+            this.ctx.drawImage(this.image, this.shift, 0,
+                188, 200,
+                this.x-10, this.y-10,
+                100, 80);
+        }
     }
 
     changeFrames() {
-        this.shift += 80;
-        if (this.shift > 200) {
-            this.shift = 0;
+        if (!this.flying) {
+            this.shift += 80;
+            if (this.shift > 200) {
+                this.shift = 0;
+            }
+        }
+        else {
+            this.shift += 188;
+            if (this.shift > 600) {
+                this.shift = 0;
+            }
         }
     }
 

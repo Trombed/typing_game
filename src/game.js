@@ -5,11 +5,16 @@ import Explosion from "./explosion";
 
 
 class Game {
-    constructor(ctx, canvas, wordBox, input) {
+    constructor(ctx, canvas, wordBox, input, infoBox, cursor, hpBox, killsBox, wpmBox) {
         this.ctx = ctx;
         this.canvas = canvas;
         this.input = input;
         this.wordBox = wordBox;
+        this.infoBox = infoBox;
+        this.cursor = cursor;
+        this.hpBox = hpBox;
+        this.killsBox = killsBox;
+        this.wpmBox = wpmBox;
         this.gameOver = false;
         this.enemies = [];
         this.explosion = [];
@@ -19,10 +24,8 @@ class Game {
         this.player = new Mage(this.ctx, this.canvas);
         this.heart.src = "./images/heart.png";
         this.startGame = this.startGame.bind(this)
-        
         this.background = new Image();
         this.background.src = "./images/background.png"
-        this.wave = 1;
         this.wpmTime = new Date();
         this.wordsEntered = 0;
         this.wpm = 0;
@@ -34,8 +37,10 @@ class Game {
 
     startGame() {
         this.canvas.removeEventListener("click", this.startGame)
-        let input = document.getElementById("user-input");
-        input.classList.toggle("hide")
+        // let input = document.getElementById("user-input");
+        this.input.classList.toggle("hide")
+        this.cursor.classList.toggle("hide")
+        this.infoBox.classList.toggle("hide")
         this.currentFrame = new Date();
         this.explosionFrame = new Date();
         this.playerFrame = new Date();
@@ -60,9 +65,6 @@ class Game {
         this.drawExplosions();
         this.checkOOB();
         this.checkInput();
-        this.showHealth();
-        this.drawMenu();
-        this.drawWPM();
         this.spawnEnemy();
         this.drawPlayer();
 
@@ -88,11 +90,21 @@ class Game {
     drawPlayer() {
         let now = new Date();
         let step = now - this.playerFrame;
-        this.player.draw();
+
+        if (this.input.value === "") {
+            this.player.draw();
+                if (step > 500) {
+                    this.player.changeFrames();
+                    this.playerFrame = new Date();
+                }
+        } else {
+            this.player.drawChant();
             if (step > 500) {
-                this.player.changeFrames();
+                this.player.changeChantingFrames();
                 this.playerFrame = new Date();
             }
+
+        }
     }
 
     drawExplosions() {
@@ -115,6 +127,7 @@ class Game {
             if (this.enemies[i].x < 100) {
                 this.enemies.splice(i, 1)
                 this.health -= 1;
+                this.showHealth();
                 // this.slashSound.play();
             }
         }
@@ -128,41 +141,30 @@ class Game {
                 this.enemies.splice(i,1)
                 this.input.value = "";
                 this.wordsEntered += 1;
+                this.updateKill();
+                this.updateWPM();
             }
         }
     }
 
+    updateKill() {
+        this.killsBox.innerHTML = `${this.wordsEntered}`
+    }
+
     showHealth() {
-        let x = 480
-        for (let i = 0; i < this.health; i++ ) {
-            // debugger
-            this.ctx.drawImage(this.heart, x, 5, 20, 20 );
-            x += 35;
-        }
+        this.hpBox.innerHTML = `${this.health} / 3`
     }
 
-    drawMenu() {
-        this.ctx.beginPath();
-        this.ctx.moveTo(90, 0);
-        this.ctx.lineTo(70, 20);
-        this.ctx.lineTo(80, 0);
-        this.ctx.closePath();
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeStyle = '#666';
-        this.ctx.stroke();
-        this.ctx.fillText(`Kills: ${this.wordsEntered}`, 600, 20)
-        this.ctx.fillStyle = "#666";
-        this.ctx.fill();
-    }
-
-    drawWPM() {
+    updateWPM() {
         let now = new Date();
         const diff = now - this.wpmTime
         this.wpm = Math.floor(this.wordsEntered / ( (diff / 1000) /  60))
-        this.ctx.stroke();
-        this.ctx.fillText(`WPM: ${this.wpm}`, 600, 40)
-        this.ctx.fill();       
+        this.wpmBox.innerHTML = `${this.wpm}`
     }
+
+
+
+ 
 
     
     
