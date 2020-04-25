@@ -20,9 +20,7 @@ class Game {
         this.explosion = [];
         this.words = new Words();
         this.health = 3;
-        this.heart = new Image ();
         this.player = new Mage(this.ctx, this.canvas);
-        this.heart.src = "./images/heart.png";
         this.startGame = this.startGame.bind(this)
         this.background = new Image();
         this.background.src = "./images/background.png"
@@ -30,7 +28,8 @@ class Game {
         this.wordsEntered = 0;
         this.wpm = 0;
         this.timer = 0;
-        this.slashSound = new Audio("./sound/a4swordslash.mp3")
+        this.slashSound = new Audio("./sound/a4swordslash.mp3");
+        this.gameOvered = this.gameOvered.bind(this);
 
     }
 
@@ -46,6 +45,7 @@ class Game {
         this.playerFrame = new Date();
         this.animate();
         this.input.focus();
+
     }
 
     spawnEnemy() {
@@ -68,9 +68,10 @@ class Game {
         this.spawnEnemy();
         this.drawPlayer();
 
-        // if (this.health <= 0) {
-        //     cancelAnimationFrame(this.render)
-        // }
+        if (this.health <= 3) {
+            this.gameOvered();
+            cancelAnimationFrame(this.render);
+        }
      
     }
 
@@ -183,7 +184,15 @@ class Game {
         }
     }
 
-    gameOver() {
+    gameOvered() {
+        this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height)
+        this.cursor.classList.toggle("hide")
+        this.input.classList.toggle("hide")
+        this.wordBox.classList.toggle("hide")
+        document.getElementById("Game-Over").classList.toggle("hide")
+    }
+
+    restartGame() {
 
     }
 
