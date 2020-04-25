@@ -190,3 +190,22 @@
 .Choice {
     cursor: pointer;
 }
+
+
+
+@font-face {
+    font-family: FFFont;
+    src: url("../font/finalf.ttf") format("truetype");
+  }
+
+.Splash-Screen {
+    position: absolute;
+    height: 400px;
+    width: 800px; 
+    top: 50px;
+    z-index: 100; 
+    font-family: FFFont;
+    font-size: 50px;
+    background-color: white;
+    color: black;
+}

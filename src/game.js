@@ -84,8 +84,9 @@ class Game {
     }
 
     select() {
+        debugger
         for (let i = 0; i < this.enemies.length; i++) {
-            if (this.input.value.toUpperCase().startsWith(this.enemies[i].word) ) {
+            if (this.enemies[i].word.startsWith(this.input.value.toUpperCase() ) && this.input.value !== "") {
                 console.log("true")
                 this.ctx.drawImage(this.selector, 
                     this.enemies[i].x, this.enemies[i].y+20
