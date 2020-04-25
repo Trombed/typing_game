@@ -195,17 +195,53 @@
 
 @font-face {
     font-family: FFFont;
-    src: url("../font/finalf.ttf") format("truetype");
+    src: url("../font/finalf.woff") format('truetype');
   }
 
 .Splash-Screen {
+    background-image: url("../images/splash.png");
     position: absolute;
     height: 400px;
     width: 800px; 
     top: 50px;
     z-index: 100; 
     font-family: FFFont;
-    font-size: 50px;
-    background-color: white;
+    font-size: 80px;
+    background-color: black;
     color: black;
+
+    text-shadow:
+    -1px -1px 0 white,  
+     1px -1px 0 white,
+     -1px 1px 0 white,
+      1px 1px 0 white;
+      background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: right bottom;
+}
+
+.disable {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; 
+}
+
+.Splash-Menu {
+    margin: auto;
+    position: absolute;
+    top: 200px;
+    left: 100px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px; 
+    width: 300px;
+
+    align-items: center;
+    justify-content: center;
+    text-shadow: none;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
 }
