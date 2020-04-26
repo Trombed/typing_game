@@ -292,82 +292,85 @@
 }
 
 .Splash-Letter-1 {
-    animation:  showTopText 3s forwards;
+    animation:  showTopText 3s infinite;
     animation-delay: 2.5s;
 
 }
 
 .Splash-Letter-2 {
-    animation: showTopText 3s forwards;
+    animation: showTopText 3s infinite;
     animation-delay: 2.6s;
 }
 
 .Splash-Letter-3 {
-    animation: showTopText 3s forwards;
+    animation: showTopText 3s infinite;
     animation-delay: 2.7s;
 }
 
 .Splash-Letter-4 {
-    animation: showTopText 3s forwards;
+    animation: showTopText 3s infinite;
     animation-delay: 2.8s;
 }
 
 .Splash-Letter-5 {
-    animation: showTopText 3s forwards;
+    animation: showTopText 3s infinite;
     animation-delay: 2.9s;
 }
 
 .Splash-Letter-6 {
-    animation: showTopText 3s forwards;
+    animation: showTopText 3s infinite;
     animation-delay: 3.0s;
 }
 
 .Splash-Letter-7 {
-    animation: showTopText 3s forwards;
+    animation: showTopText 3s infinite;
     animation-delay: 3.1s;
 }
 
 .Splash-Letter-8 {
-    animation: showTopText 3s forwards;
+    animation: showTopText 3s infinite;
     animation-delay: 3.2s;
 }
 
 .Splash-Letter-9 {
-    animation: showTopText 3s forwards;
+    animation: showTopText 3s infinite;
     animation-delay: 3.3s;
 }
 
 .Splash-Letter-10 {
-    animation: showTopText 3s forwards;
+    animation: showTopText 3s infinite;
     animation-delay: 3.4s;
 }
 
 .Splash-Letter-11 {
-    animation: showTopText 3s forwards;
+    animation: showTopText 3s infinite;
     animation-delay: 3.5s;
 }
 
 .Splash-Letter-12 {
-    animation: showTopText 3s forwards;
+    animation: showTopText 3s infinite;
     animation-delay: 3.6s;
 }
 
 .Splash-Letter-13 {
-    animation: showTopText 3s forwards;
+    animation: showTopText 3s infinite;
     animation-delay: 3.7s;
 }
 
 .Splash-Letter-14 {
-    animation: showTopText 3s forwards;
+    animation: showTopText 3s infinite;
+    animation-fill-mode: backwards;
     animation-delay: 3.8s;
 }
 
 
 @keyframes showTopText {
-
-    100% { 
+    50% {
         opacity: 100%;
-    
+    }
+    100% { 
+        opacity: 0%;
+        
     }
   }
 
@@ -390,6 +393,6 @@
     }
     100% {
 
-        left: 120px;
+        left: 130px;
     }
 }
