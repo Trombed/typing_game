@@ -348,15 +348,28 @@
 }
 
 .Splash-Letter-14 {
-    animation: showTopText 3s forwards;
-    animation-delay: 3.8s;
+    animation: slide-up 3s forwards;
+    animation-delay: 0.8s;
+    opacity: 0%
+}
+
+@keyframes slide-up {
+    0% {
+        opacity: 100%;
+        left: -500px;
+    }
+    100% {
+        opacity: 100%;
+
+        left: 120px;
+    }
 }
 
 .Splash-Screen-Title {
     width: 400px;
     height: 80px;
     padding-top: 10px;
-
+    padding-left: 10px;
 }
 
 @keyframes showTopText {
@@ -384,7 +397,7 @@
 
 @keyframes slide {
     0% {
-        left: -500px
+        left: -500px;
     }
     100% {
         left: 120px;

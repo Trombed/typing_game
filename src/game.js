@@ -50,6 +50,7 @@ class Game {
         this.explosionFrame = new Date();
         this.playerFrame = new Date();
         this.animate();
+        this.input.value = "";
         this.input.focus();
 
     }
@@ -85,7 +86,6 @@ class Game {
  
         for (let i = 0; i < this.enemies.length; i++) {
             if (this.enemies[i].word.startsWith(this.input.value.toUpperCase() ) && this.input.value !== "") {
-                console.log("true")
                 this.ctx.drawImage(this.selector, 
                     this.enemies[i].x-13, this.enemies[i].y+20,
                     25,25
