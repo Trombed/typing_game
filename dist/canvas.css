@@ -270,10 +270,10 @@
     position: absolute;
     left: 150px;
     top: 50px;
-    margin-bottom: 10px;
     overflow: hidden;
     display: flex;
     flex-direction: row;
+
 }
 
 .Splash-Letter {
@@ -285,9 +285,10 @@
 
 .Splash-Screen-Title {
     width: 400px;
-    height: 80px;
-    padding-top: 10px;
+    /* height: 100px; */
+    align-items: flex-end;
     padding-left: 10px;
+    margin-top: 10px;
 }
 
 .Splash-Letter-1 {
