@@ -73,12 +73,16 @@ class Game {
         this.checkOOB();
         this.checkInput();
         this.spawnEnemy();
-        this.drawPlayer();
         this.select();
         if (this.health <= 1) {
+            this.player.alive = false; 
+            this.drawPlayer()
+   
             this.gameOvered();
+            debugger
             cancelAnimationFrame(this.render);
         }
+        this.drawPlayer();
      
     }
 
@@ -117,13 +121,16 @@ class Game {
                     this.player.changeFrames();
                     this.playerFrame = new Date();
                 }
-        } else {
+        } else if (!this.player.alive) {
+            this.player.drawDead();
+        }
+        
+        else {
             this.player.drawChant();
             if (step > 500) {
                 this.player.changeChantingFrames();
                 this.playerFrame = new Date();
             }
-
         }
     }
 
@@ -193,10 +200,6 @@ class Game {
     }
 
 
-
- 
-
-    
     
     drawBG() {
         this.ctx.drawImage(this.background, 0,0, this.background.width, this.background.height,
@@ -218,7 +221,7 @@ class Game {
     }
 
     gameOvered() {
-        this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height)
+        // this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height)
         this.cursor.classList.toggle("hide")
         this.input.classList.toggle("hide")
         this.wordBox.classList.toggle("hide")
@@ -229,21 +232,20 @@ class Game {
     }
 
     restartGame() {
-      
-  
-        document.getElementById("Game-Over").classList.toggle("hide");
         this.wordBox.classList.toggle("hide")
         this.infoBox.classList.toggle("hide")
+        document.getElementById("Game-Over").classList.toggle("hide");
         this.startGame();
     }
 
     newGame(e) {
-        document.removeEventListener("keydown", this.newGame)
         e.preventDefault();
         if (e.code === "Enter")
-        { 
+        {
 
-        this.restartGame()
+            document.removeEventListener("keydown", this.newGame);
+                this.restartGame();
+      
         }
     }
 }

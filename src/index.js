@@ -20,11 +20,15 @@ document.addEventListener("DOMContentLoaded", () => {
     
     function start(e) {
       if (e.code === "Enter") {
-        console.log("test");
-        document.getElementById("Splash").classList.add("hide");
-        document.removeEventListener("keydown", start);
-        debugger
-        game.startGame();
+        let splash = document.getElementById("Splash")
+        splash.classList.add("Swirl");
+        splash.addEventListener("animationstart", () => {
+          document.removeEventListener("keydown", start);
+          game.startGame();
+          splash.addEventListener("animationend", () => {
+            document.getElementById("Splash").classList.add("hide");
+          })
+        })
       }
 
     }

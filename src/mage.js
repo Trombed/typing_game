@@ -9,6 +9,7 @@ class Mage {
         this.image.src = "./images/mage.png";
         this.shift = 142;
         this.chantingShift = 90;
+        this.alive = true;
     }
 
 
@@ -18,6 +19,13 @@ class Mage {
             this.x, this.y,
             60, 60)
     }
+
+    drawDead () {
+        this.ctx.drawImage(this.image, 0, 
+             0, 50, 50,
+             this.x, this.y,
+             60, 60)
+     }
 
 
 
