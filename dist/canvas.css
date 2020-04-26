@@ -199,7 +199,7 @@
   }
 
 .Splash-Screen {
-    background-image: url("../images/splash.png");
+  
     position: absolute;
     height: 400px;
     width: 800px; 
@@ -209,7 +209,6 @@
     font-size: 80px;
     background-color: black;
     color: black;
-
     text-shadow:
     -1px -1px 0 white,  
      1px -1px 0 white,
@@ -218,6 +217,8 @@
       background-size: 50%;
     background-repeat: no-repeat;
     background-position: right bottom;
+    overflow: hidden;
+
 }
 
 .disable {
@@ -233,15 +234,159 @@
     margin: auto;
     position: absolute;
     top: 200px;
-    left: 100px;
+    left: 250px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 20px; 
     width: 300px;
-
     align-items: center;
     justify-content: center;
     text-shadow: none;
     color: white;
     text-align: center;
     padding: 20px 0;
+}
+
+.Splash-Menu-Text {
+    animation: menu-animation 2s infinite;   
+
+}
+
+
+@keyframes menu-animation{
+    0% {
+        opacity: 0%;
+    }
+    50% {
+        opacity: 100%
+    }
+    100% {
+        opacity: 0%;
+    }
+}
+
+
+
+.Hidden-Container {
+    position: absolute;
+    left: 150px;
+    top: 50px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    
+}
+.Splash-Letter {
+    display: block;
+    float: left;
+    opacity: 0;
+}
+
+.Splash-Letter-1 {
+    animation: showTopText 3s forwards;
+    animation-delay: 2.5s;
+}
+
+.Splash-Letter-2 {
+    animation: showTopText 3s forwards;
+    animation-delay: 2.6s;
+}
+
+.Splash-Letter-3 {
+    animation: showTopText 3s forwards;
+    animation-delay: 2.7s;
+}
+
+.Splash-Letter-4 {
+    animation: showTopText 3s forwards;
+    animation-delay: 2.8s;
+}
+
+.Splash-Letter-5 {
+    animation: showTopText 3s forwards;
+    animation-delay: 2.9s;
+}
+
+.Splash-Letter-6 {
+    animation: showTopText 3s forwards;
+    animation-delay: 3.0s;
+}
+
+.Splash-Letter-7 {
+    animation: showTopText 3s forwards;
+    animation-delay: 3.1s;
+}
+
+.Splash-Letter-8 {
+    animation: showTopText 3s forwards;
+    animation-delay: 3.2s;
+}
+
+.Splash-Letter-9 {
+    animation: showTopText 3s forwards;
+    animation-delay: 3.3s;
+}
+
+.Splash-Letter-10 {
+    animation: showTopText 3s forwards;
+    animation-delay: 3.4s;
+}
+
+.Splash-Letter-11 {
+    animation: showTopText 3s forwards;
+    animation-delay: 3.5s;
+}
+
+.Splash-Letter-12 {
+    animation: showTopText 3s forwards;
+    animation-delay: 3.6s;
+}
+
+.Splash-Letter-13 {
+    animation: showTopText 3s forwards;
+    animation-delay: 3.7s;
+}
+
+.Splash-Letter-14 {
+    animation: showTopText 3s forwards;
+    animation-delay: 3.8s;
+}
+
+.Splash-Screen-Title {
+    width: 400px;
+    height: 80px;
+    padding-top: 10px;
+
+}
+
+@keyframes showTopText {
+    0% { 
+        opacity: 100%;
+        transform: translate3d(0, 100%, 0); 
+    }
+    100% { 
+        opacity: 100%;
+        transform: translate3d(0, 0, 0); }
+  }
+
+
+.Splash-Bar-Container {
+    position: absolute;
+    top: 140px;
+    animation: slide 2s forwards;
+    background-color: black;
+    border: 1px solid white;
+    height: 5px;
+    width: 400px; 
+}
+
+
+
+@keyframes slide {
+    0% {
+        left: -500px
+    }
+    100% {
+        left: 120px;
+    }
 }

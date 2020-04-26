@@ -1,5 +1,4 @@
 import Game from "./game";
-import Splash from "./splash"
 
 document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById("game-canvas")
@@ -15,10 +14,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const wpmBox = document.getElementById("WPM")
     
     document.fonts.ready
-    const splash = new Splash(ctx, canvas);
     const game = new Game(ctx, canvas, wordBox, input, infoBox, cursor, hpBox, killsBox, wpmBox);
-  
     
-    canvas.addEventListener("click", game.startGame)
+    document.addEventListener("keydown", start)
     
+    function start(e) {
+      if (e.code === "Enter") {
+        console.log("test");
+        document.getElementById("Splash").classList.add("hide");
+        document.removeEventListener("keydown", start);
+        debugger
+        game.startGame();
+      }
+
+    }
   });

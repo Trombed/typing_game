@@ -18,13 +18,11 @@ class Game {
         this.gameOver = false;
         this.level = 1
         this.words = new Words();
-        
         this.player = new Mage(this.ctx, this.canvas);
         this.startGame = this.startGame.bind(this)
         this.background = new Image();
         this.background.src = "./images/background.png"
         this.wpmTime = new Date();
-   
         this.slashSound = new Audio("./sound/a4swordslash.mp3");
         this.gameOvered = this.gameOvered.bind(this);
         this.restartGame = this.restartGame.bind(this)
@@ -33,10 +31,10 @@ class Game {
         this.selector.src = "./images/static_cursor.png"
 
     }
-    
+
 
     startGame() {
-        this.canvas.removeEventListener("click", this.startGame)
+        // this.canvas.removeEventListener("click", this.startGame)
         this.input.classList.toggle("hide")
         this.cursor.classList.toggle("hide")
         this.infoBox.classList.toggle("hide")
@@ -84,13 +82,13 @@ class Game {
     }
 
     select() {
-        debugger
+ 
         for (let i = 0; i < this.enemies.length; i++) {
             if (this.enemies[i].word.startsWith(this.input.value.toUpperCase() ) && this.input.value !== "") {
                 console.log("true")
                 this.ctx.drawImage(this.selector, 
-                    this.enemies[i].x, this.enemies[i].y+20
-                    
+                    this.enemies[i].x-13, this.enemies[i].y+20,
+                    25,25
                     )   
             }
         }
@@ -172,7 +170,7 @@ class Game {
 
     updateLevel() {
         this.level += 1;
-        this.speed += 0.5
+        this.speed += 0.5;
         for(let i = 0; i < this.enemies.length; i++) {
             this.enemies[i].speedLevel = this.speed;
         }
@@ -248,7 +246,6 @@ class Game {
         this.restartGame()
         }
     }
-
 }
 
 export default Game; 
