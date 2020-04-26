@@ -275,8 +275,8 @@
     overflow: hidden;
     display: flex;
     flex-direction: row;
-    
 }
+
 .Splash-Letter {
     display: block;
     float: left;
@@ -285,7 +285,7 @@
 }
 
 .Splash-Letter-1 {
-    animation: showTopText 3s forwards;
+    animation: slide-up 3s forwards;
     animation-delay: 2.5s;
     left: 100px;
 }
@@ -363,7 +363,7 @@
     }
     100% {
         opacity: 100%;
-        top: 100px;
+        top: 10px;
     }
 }
 
