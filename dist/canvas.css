@@ -364,13 +364,10 @@
 
 
 @keyframes showTopText {
-    0% { 
-        opacity: 100%;
-        top: -100;
-    }
+
     100% { 
         opacity: 100%;
-        top: 0;
+    
     }
   }
 
