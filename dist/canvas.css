@@ -197,6 +197,23 @@
     font-family: FFFont;
     src: url("../font/finalf.woff") format('truetype');
   }
+.Splash-Second {
+    background-image: url("../images/cloud.png");
+    position: absolute;
+    top: 0;
+    height: 400px;
+    width: 800px;
+    opacity: 10%;
+    animation: slideBG 40s linear infinite;
+    background-repeat: repeat-x;
+    background-position: top left;
+}
+
+@keyframes slideBG {
+    from { background-position: 0, 0}
+    to { background-position: 1000%, 0}
+}
+
 
 .Splash-Screen {
     background-image: url('../images/splash.png');
@@ -219,7 +236,6 @@
     background-position: right bottom;
     background-size: cover;
     overflow: hidden;
-
 }
 
 .disable {
