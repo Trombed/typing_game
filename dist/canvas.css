@@ -199,7 +199,7 @@
   }
 
 .Splash-Screen {
-  
+    background-image: url('../images/splash.png');
     position: absolute;
     height: 400px;
     width: 800px; 
@@ -207,7 +207,7 @@
     z-index: 100; 
     font-family: FFFont;
     font-size: 80px;
-    background-color: black;
+    /* background-color: black; */
     color: black;
     text-shadow:
     -1px -1px 0 white,  
@@ -217,6 +217,7 @@
       background-size: 50%;
     background-repeat: no-repeat;
     background-position: right bottom;
+    background-size: cover;
     overflow: hidden;
 
 }
@@ -280,11 +281,13 @@
     display: block;
     float: left;
     opacity: 0;
+    position: absolute;
 }
 
 .Splash-Letter-1 {
     animation: showTopText 3s forwards;
     animation-delay: 2.5s;
+    left: 100px;
 }
 
 .Splash-Letter-2 {
@@ -348,7 +351,7 @@
 }
 
 .Splash-Letter-14 {
-    animation: slide-up 3s forwards;
+    animation: slide 3s forwards;
     animation-delay: 0.8s;
     opacity: 0%
 }
@@ -356,12 +359,12 @@
 @keyframes slide-up {
     0% {
         opacity: 100%;
-        left: -500px;
+        top: 500px;
     }
     100% {
         opacity: 100%;
 
-        left: 120px;
+        top: 120px;
     }
 }
 
@@ -400,6 +403,7 @@
         left: -500px;
     }
     100% {
+
         left: 120px;
     }
 }
