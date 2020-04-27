@@ -15,6 +15,7 @@ class Game {
         this.hpBox = hpBox;
         this.killsBox = killsBox;
         this.wpmBox = wpmBox;
+        this.initializeGame = false;
         this.gameOver = false;
         this.words = new Words();
         this.player = new Mage(this.ctx, this.canvas);
@@ -28,53 +29,54 @@ class Game {
         this.spawnTimer = 0;
         this.timer = 1000;
         this.spawnEnemy = this.spawnEnemy.bind(this)
-       
         this.backgrounds = {
             1: './images/background.png',
             2: './images/background2.png',
             3: './images/background3.png',
-            4: './images/background4.png',
+            4: './images/background4.png'
         }
-        console.log("start game constructor")
+    
     }
 
 
     startGame() {
-        console.log("start game start game")
-        this.input.classList.toggle("hide")
-        this.cursor.classList.toggle("hide")
-        this.infoBox.classList.toggle("hide")
-        this.player.alive = true;
-        this.wordsEntered = 0;
-        this.speed = 1
-        this.level = 1;
-        this.wpm = 0;
-        this.scene = "Battle";
-        this.currentBG = 0;
-        this.rotateBackground();
-    
-    
-        this.enemies = [];
-        console.log(this.enemies)
-        this.explosion = [];
-        this.maxHealth = 3;
-        this.health = 3;
-        this.showHealth();
-        this.currentFrame = new Date();
-        this.explosionFrame = new Date();
-        this.playerFrame = new Date();
-        this.initial();
-        this.animate();
-        this.input.value = "";
-        this.input.focus();
-
-        let that = this;
-
-        this.spawnInterval = setInterval( function() {
+        if (!this.initializeGame) {
+            this.initializeGame = true;      
+            this.input.classList.toggle("hide")
+            this.cursor.classList.toggle("hide")
+            this.infoBox.classList.toggle("hide")
+            this.player.alive = true;
+            this.wordsEntered = 0;
+            this.speed = 1
+            this.level = 1;
+            this.wpm = 0;
+            this.scene = "Battle";
+            this.currentBG = 0;
+            this.rotateBackground();
         
-            that.spawnEnemy();
-            }, that.timer
-        )
+        
+            this.enemies = [];
+            console.log(this.enemies)
+            this.explosion = [];
+            this.maxHealth = 3;
+            this.health = 3;
+            this.showHealth();
+            this.currentFrame = new Date();
+            this.explosionFrame = new Date();
+            this.playerFrame = new Date();
+            this.initial();
+            this.animate();
+            this.input.value = "";
+            this.input.focus();
+
+            let that = this;
+
+            this.spawnInterval = setInterval( function() {
+            
+                that.spawnEnemy();
+                }, that.timer
+            )
+        }
 
     }
 
@@ -248,8 +250,6 @@ class Game {
         animate.removeEventListener("animationend", () => {
             animate.classList.remove("Level-Up-Animation")
         })
-        
-
     }
 
 
@@ -292,7 +292,7 @@ class Game {
     }
 
     gameOvered() {
-
+        this.initializeGame = false;
 
         document.getElementById("Game-Background").innerHTML = ""
         this.cursor.classList.toggle("hide")

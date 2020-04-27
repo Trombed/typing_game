@@ -21,7 +21,8 @@ class Enemy {
     }
 
     spawnY() {
-        let num = (Math.random() * (400)) 
+        let num = (Math.random() * (350)) 
+
         if ( num < 150 ) {
             this.image.src = "./images/flying.png";
             this.flying = true;
