@@ -5,7 +5,7 @@ import Explosion from "./explosion";
 
 
 class Game {
-    constructor(ctx, canvas, wordBox, input, infoBox, cursor, hpBox, killsBox, wpmBox) {
+    constructor(ctx, canvas, wordBox, input, infoBox, cursor, hpBox, killsBox, wpmBox, tracks, muted) {
         this.ctx = ctx;
         this.canvas = canvas;
         this.input = input;
@@ -16,7 +16,8 @@ class Game {
         this.killsBox = killsBox;
         this.wpmBox = wpmBox;
         this.gameOver = false;
-        this.level = 1
+        this.level = 1;
+        this.tracks = tracks;
         this.words = new Words();
         this.player = new Mage(this.ctx, this.canvas);
         this.startGame = this.startGame.bind(this)
@@ -29,21 +30,26 @@ class Game {
         this.newGame = this.newGame.bind(this)
         this.selector = new Image();
         this.selector.src = "./images/static_cursor.png"
-
+        this.spawnTimer = 0;
+        this.muted = muted;
+        this.timer = 1000;
+        this.spawnEnemy = this.spawnEnemy.bind(this)
     }
 
 
     startGame() {
-        // this.canvas.removeEventListener("click", this.startGame)
         this.input.classList.toggle("hide")
         this.cursor.classList.toggle("hide")
         this.infoBox.classList.toggle("hide")
+        this.player.alive = true;
         this.wordsEntered = 0;
         this.speed = 1
         this.wpm = 0;
-        this.timer = 0;
+        this.scene = "Battle"
+        this.playMusic();
         this.enemies = [];
         this.explosion = [];
+        this.maxHealth = 3
         this.health = 3;
         this.showHealth();
         this.currentFrame = new Date();
@@ -52,42 +58,51 @@ class Game {
         this.animate();
         this.input.value = "";
         this.input.focus();
+        let that = this;
+        this.spawnInterval = setInterval( function() {
+ 
+            that.spawnEnemy();
+            }, that.timer
+        )
 
     }
 
     spawnEnemy() {
-        if (  (this.timer %  100) === 0 ) {
-            this.enemies.push(new Enemy(this.ctx, this.canvas, this.words.newWord(), this.speed))
-        }
+ 
+                this.enemies.push(new Enemy(this.ctx, this.canvas, this.words.newWord(), this.speed))
+                this.updateWord();
+            
+    }
 
-        this.updateWord();
+    checkEnemies() {
+
     }
 
     animate() {
         this.render = requestAnimationFrame(this.animate.bind(this));
-        let timer = setInterval( () => { this.timer += 1, 10  })
+
         this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
         this.drawBG();
         this.drawEnemies();
         this.drawExplosions();
         this.checkOOB();
         this.checkInput();
-        this.spawnEnemy();
+        this.checkEnemies();
+        // this.spawnEnemy();
         this.select();
-        if (this.health <= 1) {
+        if (this.health <= 0) {
             this.player.alive = false; 
             this.drawPlayer()
-   
             this.gameOvered();
-            debugger
+
             cancelAnimationFrame(this.render);
         }
         this.drawPlayer();
-     
     }
 
+  
+
     select() {
- 
         for (let i = 0; i < this.enemies.length; i++) {
             if (this.enemies[i].word.startsWith(this.input.value.toUpperCase() ) && this.input.value !== "") {
                 this.ctx.drawImage(this.selector, 
@@ -155,7 +170,7 @@ class Game {
                 this.enemies.splice(i, 1)
                 this.health -= 1;
                 this.showHealth();
-                // this.slashSound.play();
+                if (!this.muted) this.slashSound.play();
             }
         }
     }
@@ -170,6 +185,7 @@ class Game {
                 this.wordsEntered += 1;
                 this.updateKill();
                 this.updateWPM();
+                this.updateWord();
                 if (this.wordsEntered % 10 === 0) this.updateLevel();
             }
         }
@@ -178,18 +194,32 @@ class Game {
     updateLevel() {
         this.level += 1;
         this.speed += 0.5;
+        this.maxHealth += 1;
+        this.timer -= 10;
+        if (this.health <= this.maxHealth) this.health += 1;
         for(let i = 0; i < this.enemies.length; i++) {
             this.enemies[i].speedLevel = this.speed;
         }
         document.getElementById("LEVEL").innerHTML = this.level
+        this.showHealth();
+        this.showLevelUp();
     }
+
+    showLevelUp() {
+        let that = this
+        let image = document.getElementById("Level-Up")
+        image.classList.toggle("hide")
+        
+    }
+
+
 
     updateKill() {
         this.killsBox.innerHTML = `${this.wordsEntered}`
     }
 
     showHealth() {
-        this.hpBox.innerHTML = `${this.health} / 3`
+        this.hpBox.innerHTML = `${this.health} / ${this.maxHealth}`
     }
 
     updateWPM() {
@@ -226,8 +256,29 @@ class Game {
         this.input.classList.toggle("hide")
         this.wordBox.classList.toggle("hide")
         document.getElementById("Game-Over").classList.toggle("hide")
+        clearInterval(this.spawnInterval)
+        document.addEventListener("keydown", this.newGame);
+        this.enemies = [];
+        this.updateWord();
+    }
 
-        document.addEventListener("keydown", this.newGame)
+    playMusic() {
+        if (!this.muted) {
+            switch (this.scene) {
+                case "Battle":
+                    this.tracks[0].pause();
+                    this.tracks[1].play();
+                    break;
+                case "GameOver":
+                    this.tracks[1].pause();
+                    this.tracks[0].play();
+                    break;
+                default:
+                    this.tracks[0].pause();
+                    this.tracks[1].pause();
+                    break;
+            }
+        }
 
     }
 
@@ -236,16 +287,16 @@ class Game {
         this.infoBox.classList.toggle("hide")
         document.getElementById("Game-Over").classList.toggle("hide");
         this.startGame();
+
+
     }
 
     newGame(e) {
         e.preventDefault();
         if (e.code === "Enter")
         {
-
             document.removeEventListener("keydown", this.newGame);
                 this.restartGame();
-      
         }
     }
 }

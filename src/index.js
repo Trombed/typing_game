@@ -12,9 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const hpBox = document.getElementById("HP")
     const killsBox = document.getElementById("KILLS")
     const wpmBox = document.getElementById("WPM")
+    const tracks = []
+    const preludeMusic = new Audio("./sound/prelude.mp3")
+    const battleMusic = new Audio("./sound/battle.mp3")
+    tracks.push(preludeMusic, battleMusic);
+    const muted = false
     
     document.fonts.ready
-    const game = new Game(ctx, canvas, wordBox, input, infoBox, cursor, hpBox, killsBox, wpmBox);
+    const game = new Game(ctx, canvas, wordBox, input, infoBox, cursor, hpBox, killsBox, wpmBox, tracks, muted);
     
     document.addEventListener("keydown", start)
     
@@ -25,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         splash.addEventListener("animationstart", () => {
           document.removeEventListener("keydown", start);
           game.startGame();
+        
           splash.addEventListener("animationend", () => {
             document.getElementById("Splash").classList.add("hide");
           })
