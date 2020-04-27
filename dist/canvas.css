@@ -498,3 +498,12 @@
     left: 150px;
     
 }
+
+
+.Volume-Control {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+}

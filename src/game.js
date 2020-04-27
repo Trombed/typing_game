@@ -46,6 +46,7 @@ class Game {
         this.speed = 1
         this.wpm = 0;
         this.scene = "Battle"
+        this.tracks[1].currentTime = 0;
         this.playMusic();
         this.enemies = [];
         this.explosion = [];
@@ -252,6 +253,9 @@ class Game {
 
     gameOvered() {
         // this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height)
+        this.scene = "GameOver"
+        this.track[0].currentTime = 0;
+        this.playMusic();
         this.cursor.classList.toggle("hide")
         this.input.classList.toggle("hide")
         this.wordBox.classList.toggle("hide")
@@ -260,6 +264,7 @@ class Game {
         document.addEventListener("keydown", this.newGame);
         this.enemies = [];
         this.updateWord();
+        
     }
 
     playMusic() {
