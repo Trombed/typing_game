@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const battleMusic = new Audio("./sound/battle.mp3")
     const volumeControl = document.getElementById("Volume")
     let muted = false; 
-    debugger
 
     volumeControl.addEventListener("click", toggleMusic)
 
@@ -48,14 +47,14 @@ document.addEventListener("DOMContentLoaded", () => {
       muted = !muted;
       console.log(muted)
       switch (muted) {
-        case true:
+        case false:
           volumeControl.innerHTML = '<img src="./images/unmuted.svg" class="Volume-Icon" id="Volume-Icon">'
           break;
-        case false: 
+        case true: 
           volumeControl.innerHTML = '<img src="./images/muted.svg" class="Volume-Icon" id="Volume-Icon">'
           break;
       }
-      game.playMusic;
+      game.playMusic();
     }
   
   });

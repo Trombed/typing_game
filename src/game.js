@@ -22,7 +22,8 @@ class Game {
         this.player = new Mage(this.ctx, this.canvas);
         this.startGame = this.startGame.bind(this)
         this.background = new Image();
-        this.background.src = "./images/background.png"
+        // this.background.src = "./images/background.png"
+        // this.background.src = "./images/25293.png"
         this.wpmTime = new Date();
         this.slashSound = new Audio("./sound/a4swordslash.mp3");
         this.gameOvered = this.gameOvered.bind(this);
@@ -34,6 +35,13 @@ class Game {
         this.muted = muted;
         this.timer = 1000;
         this.spawnEnemy = this.spawnEnemy.bind(this)
+       
+        this.backgrounds = {
+            1: './images/background.png',
+            2: './images/background2.png',
+            3: './images/background3.png',
+            4: './images/background4.png',
+        }
     }
 
 
@@ -45,7 +53,9 @@ class Game {
         this.wordsEntered = 0;
         this.speed = 1
         this.wpm = 0;
-        this.scene = "Battle"
+        this.scene = "Battle";
+        this.currentBG = 0;
+        this.rotateBackground();
         this.tracks[1].currentTime = 0;
         this.playMusic();
         this.enemies = [];
@@ -60,12 +70,21 @@ class Game {
         this.input.value = "";
         this.input.focus();
         let that = this;
+
         this.spawnInterval = setInterval( function() {
- 
+        
             that.spawnEnemy();
             }, that.timer
         )
 
+    }
+
+    rotateBackground() {
+        this.currentBG++;
+        document.getElementById("Game-Background").style.backgroundImage = `url(${this.backgrounds[this.currentBG]})`;
+        if (this.currentBG >= 4) this.currentBG = 0;
+        console.log(this.currentBG)
+        
     }
 
     spawnEnemy() {
@@ -75,20 +94,16 @@ class Game {
             
     }
 
-    checkEnemies() {
-
-    }
 
     animate() {
         this.render = requestAnimationFrame(this.animate.bind(this));
 
         this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
-        this.drawBG();
+        // this.drawBG();
         this.drawEnemies();
         this.drawExplosions();
         this.checkOOB();
         this.checkInput();
-        this.checkEnemies();
         // this.spawnEnemy();
         this.select();
         if (this.health <= 0) {
@@ -171,7 +186,7 @@ class Game {
                 this.enemies.splice(i, 1)
                 this.health -= 1;
                 this.showHealth();
-                if (!this.muted) this.slashSound.play();
+                if (this.muted) this.slashSound.play();
             }
         }
     }
@@ -197,6 +212,7 @@ class Game {
         this.speed += 0.5;
         this.maxHealth += 1;
         this.timer -= 10;
+        this.rotateBackground();
         if (this.health <= this.maxHealth) this.health += 1;
         for(let i = 0; i < this.enemies.length; i++) {
             this.enemies[i].speedLevel = this.speed;
@@ -235,6 +251,7 @@ class Game {
     drawBG() {
         this.ctx.drawImage(this.background, 0,0, this.background.width, this.background.height,
             0,0, this.canvas.width, this.canvas.height)
+ 
     }
 
     updateWord() {
@@ -254,7 +271,7 @@ class Game {
     gameOvered() {
         // this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height)
         this.scene = "GameOver"
-        this.track[0].currentTime = 0;
+        this.tracks[0].currentTime = 0;
         this.playMusic();
         this.cursor.classList.toggle("hide")
         this.input.classList.toggle("hide")
@@ -268,23 +285,32 @@ class Game {
     }
 
     playMusic() {
-        if (!this.muted) {
-            switch (this.scene) {
-                case "Battle":
-                    this.tracks[0].pause();
-                    this.tracks[1].play();
-                    break;
-                case "GameOver":
-                    this.tracks[1].pause();
-                    this.tracks[0].play();
-                    break;
-                default:
-                    this.tracks[0].pause();
-                    this.tracks[1].pause();
-                    break;
-            }
-        }
+        if (this.muted === false ) {
+            // switch (this.scene) {
+            //     case "Battle":
+            //         this.tracks[0].pause();
+            //         this.tracks[1].play();
+            //         console.log("battle")
+            //         break;
+            //     case "GameOver":
+            //         this.tracks[1].pause();
+            //         this.tracks[0].play();
+            //         console.log("gameover")
+            //         break;
+            //     default:
+            //         this.tracks[0].pause();
+            //         this.tracks[1].pause();
+            //         console.log("DEFAULT")
+            //         break;
+              
+            // }
+        } 
+    }
 
+    pauseMusic() {
+        debugger
+        this.tracks[0].muted = true;
+        this.tracks[1].muted = true;
     }
 
     restartGame() {
