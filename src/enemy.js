@@ -11,7 +11,13 @@ class Enemy {
         this.speedLevel = speed
 
         this.shift = 0;
-       
+        this.window = document.createElement("div");
+        this.window.classList.add("Word-List-Container", "Enemy-Word");
+        this.window.innerHTML = this.word;
+        let background = document.getElementById("Game-Background");
+        this.window.style.top = `${this.y-10}px`
+        this.window.style.left = `${this.x}px`
+        background.append(this.window)
     }
 
     spawnY() {
@@ -28,12 +34,7 @@ class Enemy {
 
     drawWord () {
         this.x -= this.speedLevel
-        this.ctx.font = "16px VERDANA"
-        this.ctx.strokeStyle = "green";
-        this.ctx.strokeWidth = 2;
-        this.ctx.strokeText(this.word, this.x, this.y)
-        this.ctx.fillStyle = "red";
-        this.ctx.fillText(this.word, this.x, this.y)
+        this.window.style.left = `${this.x}px`
     }
 
     drawEnemy() {
@@ -68,6 +69,11 @@ class Enemy {
     draw() {
         this.drawWord();
         this.drawEnemy();
+    }
+
+    destroyWord() {
+        this.window.remove();
+     
     }
 
 

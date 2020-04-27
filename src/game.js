@@ -20,7 +20,6 @@ class Game {
         this.player = new Mage(this.ctx, this.canvas);
         this.startGame = this.startGame.bind(this)
         this.wpmTime = new Date();
-        this.slashSound = new Audio("./sound/a4swordslash.mp3");
         this.gameOvered = this.gameOvered.bind(this);
         this.restartGame = this.restartGame.bind(this)
         this.newGame = this.newGame.bind(this)
@@ -36,10 +35,12 @@ class Game {
             3: './images/background3.png',
             4: './images/background4.png',
         }
+        console.log("start game constructor")
     }
 
 
     startGame() {
+        console.log("start game start game")
         this.input.classList.toggle("hide")
         this.cursor.classList.toggle("hide")
         this.infoBox.classList.toggle("hide")
@@ -54,6 +55,7 @@ class Game {
     
     
         this.enemies = [];
+        console.log(this.enemies)
         this.explosion = [];
         this.maxHealth = 3;
         this.health = 3;
@@ -141,24 +143,29 @@ class Game {
     drawPlayer() {
         let now = new Date();
         let step = now - this.playerFrame;
-
-        if (this.input.value === "") {
-            this.player.draw();
-                if (step > 500) {
-                    this.player.changeFrames();
+        switch (this.player.alive) {
+            case true:
+                if (this.input.value === "") {
+                    this.player.draw();
+                    if (step > 500) {
+                        this.player.changeFrames();
+                        this.playerFrame = new Date();
+                    }
+                 } 
+                else {
+                    this.player.drawChant();
+                    if (step > 500) {
+                    this.player.changeChantingFrames();
                     this.playerFrame = new Date();
+                    }
                 }
-        } else if (!this.player.alive) {
-            this.player.drawDead();
-        }
+                break;
         
-        else {
-            this.player.drawChant();
-            if (step > 500) {
-                this.player.changeChantingFrames();
-                this.playerFrame = new Date();
-            }
+            case false:
+                this.player.drawDead();
+                break;
         }
+    
     }
 
     drawExplosions() {
@@ -178,9 +185,13 @@ class Game {
 
     checkOOB() {
         for (let i = 0; i < this.enemies.length; i++) {
-            if (this.enemies[i].x < 100) {
+            if (this.enemies[i].x <= 50) {
+                this.enemies[i].destroyWord();
                 this.enemies.splice(i, 1)
                 this.health -= 1;
+                this.ctx.fillStyle = 'rgba(255, 0, 0, 0.8)'
+                this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height)
+                this.ctx.fill();
                 this.showHealth();
             }
         }
@@ -191,7 +202,9 @@ class Game {
         for (let i = 0; i < this.enemies.length; i++) {
             if (this.input.value.toUpperCase() === this.enemies[i].word) {
                 this.explosion.push(new Explosion(this.ctx, this.canvas, this.enemies[i].x, this.enemies[i].y ))         
+                this.enemies[i].destroyWord();
                 this.enemies.splice(i,1)
+                
                 this.input.value = "";
                 this.wordsEntered += 1;
                 this.updateKill();
@@ -281,7 +294,7 @@ class Game {
     gameOvered() {
 
 
-
+        document.getElementById("Game-Background").innerHTML = ""
         this.cursor.classList.toggle("hide")
         this.input.classList.toggle("hide")
         this.wordBox.classList.toggle("hide")
