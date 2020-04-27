@@ -12,18 +12,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const hpBox = document.getElementById("HP")
     const killsBox = document.getElementById("KILLS")
     const wpmBox = document.getElementById("WPM")
-    const tracks = []
-    const preludeMusic = new Audio("./sound/prelude.mp3")
-    const battleMusic = new Audio("./sound/battle.mp3")
-    const volumeControl = document.getElementById("Volume")
-    let muted = false; 
-
-    volumeControl.addEventListener("click", toggleMusic)
-
-    tracks.push(preludeMusic, battleMusic);
+  
     
     document.fonts.ready
-    const game = new Game(ctx, canvas, wordBox, input, infoBox, cursor, hpBox, killsBox, wpmBox, tracks, muted);
+    const game = new Game(ctx, canvas, wordBox, input, infoBox, cursor, hpBox, killsBox, wpmBox);
     
     document.addEventListener("keydown", start)
     
@@ -43,18 +35,5 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    function toggleMusic() {
-      muted = !muted;
-      console.log(muted)
-      switch (muted) {
-        case false:
-          volumeControl.innerHTML = '<img src="./images/unmuted.svg" class="Volume-Icon" id="Volume-Icon">'
-          break;
-        case true: 
-          volumeControl.innerHTML = '<img src="./images/muted.svg" class="Volume-Icon" id="Volume-Icon">'
-          break;
-      }
-      game.playMusic();
-    }
-  
+   
   });

@@ -460,7 +460,6 @@
     }
     100% { 
         opacity: 0%;
-        
     }
   }
 
@@ -490,14 +489,30 @@
 
 
 .Level-Up {
-    width: 100px;
-    height: 50px;
     position: absolute;
-    left: 200px;
-    z-index: 10;
-    top: 460px;
-    left: 150px;
-    
+    left: 0;
+    top: 400;
+    opacity: 0%;
+}
+
+.Level-Up-Animation {
+    animation: level 3s;
+}
+
+.Level-Up-Size {
+    position: absolute; 
+    width: 100px;
+}
+
+@keyframes level {
+    0% {
+      opacity: 0%
+     
+    }
+    100% {
+        opacity: 100%
+    }
+
 }
 
 

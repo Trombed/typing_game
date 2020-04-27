@@ -5,7 +5,7 @@ import Explosion from "./explosion";
 
 
 class Game {
-    constructor(ctx, canvas, wordBox, input, infoBox, cursor, hpBox, killsBox, wpmBox, tracks, muted) {
+    constructor(ctx, canvas, wordBox, input, infoBox, cursor, hpBox, killsBox, wpmBox) {
         this.ctx = ctx;
         this.canvas = canvas;
         this.input = input;
@@ -16,14 +16,9 @@ class Game {
         this.killsBox = killsBox;
         this.wpmBox = wpmBox;
         this.gameOver = false;
-        this.level = 1;
-        this.tracks = tracks;
         this.words = new Words();
         this.player = new Mage(this.ctx, this.canvas);
         this.startGame = this.startGame.bind(this)
-        this.background = new Image();
-        // this.background.src = "./images/background.png"
-        // this.background.src = "./images/25293.png"
         this.wpmTime = new Date();
         this.slashSound = new Audio("./sound/a4swordslash.mp3");
         this.gameOvered = this.gameOvered.bind(this);
@@ -32,7 +27,6 @@ class Game {
         this.selector = new Image();
         this.selector.src = "./images/static_cursor.png"
         this.spawnTimer = 0;
-        this.muted = muted;
         this.timer = 1000;
         this.spawnEnemy = this.spawnEnemy.bind(this)
        
@@ -52,23 +46,26 @@ class Game {
         this.player.alive = true;
         this.wordsEntered = 0;
         this.speed = 1
+        this.level = 1;
         this.wpm = 0;
         this.scene = "Battle";
         this.currentBG = 0;
         this.rotateBackground();
-        this.tracks[1].currentTime = 0;
-        this.playMusic();
+    
+    
         this.enemies = [];
         this.explosion = [];
-        this.maxHealth = 3
+        this.maxHealth = 3;
         this.health = 3;
         this.showHealth();
         this.currentFrame = new Date();
         this.explosionFrame = new Date();
         this.playerFrame = new Date();
+        this.initial();
         this.animate();
         this.input.value = "";
         this.input.focus();
+
         let that = this;
 
         this.spawnInterval = setInterval( function() {
@@ -185,7 +182,6 @@ class Game {
                 this.enemies.splice(i, 1)
                 this.health -= 1;
                 this.showHealth();
-                if (this.muted) this.slashSound.play();
             }
         }
     }
@@ -206,6 +202,13 @@ class Game {
         }
     }
 
+    initial() {
+        document.getElementById("LEVEL").innerHTML = this.level;
+        this.killsBox.innerHTML = `${this.wordsEntered}`;
+        this.wpmBox.innerHTML = `${this.wpm}`
+        this.updateWord();
+    }
+
     updateLevel() {
         this.level += 1;
         this.speed += 0.5;
@@ -222,10 +225,18 @@ class Game {
     }
 
     showLevelUp() {
-        let that = this
-        let image = document.getElementById("Level-Up")
-        image.classList.toggle("hide")
+        let animate = document.getElementById("Level-Up")
+        animate.classList.add("Level-Up-Animation")
+
+        animate.addEventListener("animationend", () => {
+            animate.classList.remove("Level-Up-Animation")
+        })
+
+        animate.removeEventListener("animationend", () => {
+            animate.classList.remove("Level-Up-Animation")
+        })
         
+
     }
 
 
@@ -268,10 +279,9 @@ class Game {
     }
 
     gameOvered() {
-        // this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height)
-        this.scene = "GameOver"
-        this.tracks[0].currentTime = 0;
-        this.playMusic();
+
+
+
         this.cursor.classList.toggle("hide")
         this.input.classList.toggle("hide")
         this.wordBox.classList.toggle("hide")
@@ -282,49 +292,20 @@ class Game {
         
     }
 
-    playMusic() {
-        if (this.muted === false ) {
-            // switch (this.scene) {
-            //     case "Battle":
-            //         this.tracks[0].pause();
-            //         this.tracks[1].play();
-            //         console.log("battle")
-            //         break;
-            //     case "GameOver":
-            //         this.tracks[1].pause();
-            //         this.tracks[0].play();
-            //         console.log("gameover")
-            //         break;
-            //     default:
-            //         this.tracks[0].pause();
-            //         this.tracks[1].pause();
-            //         console.log("DEFAULT")
-            //         break;
-              
-            // }
-        } 
-    }
-
-    pauseMusic() {
-        debugger
-        this.tracks[0].muted = true;
-        this.tracks[1].muted = true;
-    }
+   
 
     restartGame() {
         this.wordBox.classList.toggle("hide")
         this.infoBox.classList.toggle("hide")
         document.getElementById("Game-Over").classList.toggle("hide");
         this.startGame();
-
-
     }
 
     newGame(e) {
         e.preventDefault();
         if (e.code === "Enter")
         {
-            document.removeEventListener("keydown", this.newGame);
+                document.removeEventListener("keydown", this.newGame);
                 this.restartGame();
         }
     }
