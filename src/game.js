@@ -72,8 +72,9 @@ class Game {
             let that = this;
 
             this.spawnInterval = setInterval( function() {
-            
-                that.spawnEnemy();
+                if (document.hasFocus()) {
+                    that.spawnEnemy();
+                }
                 }, that.timer
             )
         }
