@@ -83,7 +83,6 @@ class Game {
         this.currentBG++;
         document.getElementById("Game-Background").style.backgroundImage = `url(${this.backgrounds[this.currentBG]})`;
         if (this.currentBG >= 4) this.currentBG = 0;
-        console.log(this.currentBG)
         
     }
 
@@ -263,7 +262,7 @@ class Game {
                 } else { 
                 newDiv.classList.add("enemies-word")
                 }
-            newDiv.innerHTML = this.enemies[i].word
+            newDiv.innerHTML = `${i+1}: ${this.enemies[i].word}`
             this.wordBox.append(newDiv)
         }
     }
@@ -277,10 +276,9 @@ class Game {
         this.input.classList.toggle("hide")
         this.wordBox.classList.toggle("hide")
         document.getElementById("Game-Over").classList.toggle("hide")
-        clearInterval(this.spawnInterval)
         document.addEventListener("keydown", this.newGame);
         this.enemies = [];
-        this.updateWord();
+        clearInterval(this.spawnInterval)
         
     }
 
