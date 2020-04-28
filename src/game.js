@@ -35,7 +35,6 @@ class Game {
             3: './images/background3.png',
             4: './images/background4.png'
         }
-    
     }
 
 
@@ -53,10 +52,7 @@ class Game {
             this.scene = "Battle";
             this.currentBG = 0;
             this.rotateBackground();
-        
-        
             this.enemies = [];
-            console.log(this.enemies)
             this.explosion = [];
             this.maxHealth = 3;
             this.health = 3;
@@ -68,9 +64,7 @@ class Game {
             this.animate();
             this.input.value = "";
             this.input.focus();
-
             let that = this;
-
             this.spawnInterval = setInterval( function() {
                 if (document.hasFocus()) {
                     that.spawnEnemy();
@@ -294,7 +288,6 @@ class Game {
 
     gameOvered() {
         this.initializeGame = false;
-
         document.getElementById("Game-Background").innerHTML = ""
         this.cursor.classList.toggle("hide")
         this.input.classList.toggle("hide")
@@ -303,7 +296,6 @@ class Game {
         document.addEventListener("keydown", this.newGame);
         this.enemies = [];
         clearInterval(this.spawnInterval)
-        
     }
 
    
