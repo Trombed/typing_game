@@ -1,14 +1,12 @@
-/* front page styling starts  */
+
 .Main {
     position: relative; 
-    /* padding-top: 10px;  */
     display: flex;
     justify-content: center;
     align-items: center; 
     background-color: black; 
     flex-direction: column;
     margin-top: 50px;
-
 }
 
 
@@ -23,24 +21,18 @@
 }
 
 
-
 .Icons {
     padding-top: 2vh;
     width: 50vw;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-
 }
-
-
-/*  front page styling ends */
 
 #game-canvas {
     border: 1px solid black;
     z-index: 10;
 }
-
 
 
 .speech-bubble {
@@ -123,7 +115,6 @@
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
-
 }
 
 .Info {
@@ -143,6 +134,7 @@
     display: inline;
     padding: 2px; 
 }
+
 .enemies-word-flying {
     font-family: Verdana, sans-serif;
     color: red;
@@ -163,6 +155,7 @@
     animation: swirl 0.5s linear;
     animation-iteration-count: 1;
 }
+
 @keyframes swirl{
 	0% {
         background-color: black;
@@ -182,8 +175,6 @@
         opacity: 0;
     }
 }
-
-
 
 
 .hide {
@@ -241,7 +232,8 @@
 @font-face {
     font-family: FFFont;
     src: url("../font/finalf.woff") format('truetype');
-  }
+}
+
 .Splash-Second {
     background-image: url("../images/cloud.png");
     position: absolute;
@@ -331,10 +323,8 @@
     position: absolute;
     left: 225px;
     top: 50px;
-    /* overflow: hidden; */
     display: flex;
     flex-direction: row;
-
 }
 
 
@@ -355,15 +345,12 @@
 .Splash-Letter-1 {
     animation:  showTopText 3s infinite;
     animation-direction: alternate-reverse;
-
     animation-delay: 2.5s;
-
 }
 
 .Splash-Letter-2 {
     animation: showTopText 3s infinite;
     animation-direction: alternate-reverse;
-
     animation-delay: 2.6s;
 }
 
@@ -377,70 +364,60 @@
 .Splash-Letter-4 {
     animation: showTopText 3s infinite;
     animation-direction: alternate-reverse;
-
     animation-delay: 2.8s;
 }
 
 .Splash-Letter-5 {
     animation: showTopText 3s infinite;
     animation-direction: alternate-reverse;
-
     animation-delay: 2.9s;
 }
 
 .Splash-Letter-6 {
     animation: showTopText 3s infinite;
     animation-direction: alternate-reverse;
-
     animation-delay: 3.0s;
 }
 
 .Splash-Letter-7 {
     animation: showTopText 3s infinite;
     animation-direction: alternate-reverse;
-
     animation-delay: 3.1s;
 }
 
 .Splash-Letter-8 {
     animation: showTopText 3s infinite;
     animation-direction: alternate-reverse;
-
     animation-delay: 3.2s;
 }
 
 .Splash-Letter-9 {
     animation: showTopText 3s infinite;
     animation-direction: alternate-reverse;
-
     animation-delay: 3.3s;
 }
 
 .Splash-Letter-10 {
     animation: showTopText 3s infinite;
     animation-direction: alternate-reverse;
-
     animation-delay: 3.4s;
 }
 
 .Splash-Letter-11 {
     animation: showTopText 3s infinite;
     animation-direction: alternate-reverse;
-
     animation-delay: 3.5s;
 }
 
 .Splash-Letter-12 {
     animation: showTopText 3s infinite;
     animation-direction: alternate-reverse;
-
     animation-delay: 3.6s;
 }
 
 .Splash-Letter-13 {
     animation: showTopText 3s infinite;
     animation-direction: alternate-reverse;
-
     animation-delay: 3.7s;
 }
 
@@ -522,8 +499,6 @@
 
 
 #Game-Background {
-    /* background-image: url("../images/background.png"); */
-    /* background-color: black; */
     position: absolute;
     height: 400px;
     width: 800px;
@@ -534,7 +509,6 @@
 .Enemy-Word {
     color: white;
     padding: 2px;
-
     z-index: 10;
     position: absolute;
 }

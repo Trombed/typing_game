@@ -2,7 +2,6 @@ class Mage {
     constructor (ctx, canvas) {
         this.ctx = ctx;
         this.canvas = canvas;
-
         this.y = 250;
         this.x = 5;
         this.image = new Image ();
@@ -11,7 +10,6 @@ class Mage {
         this.chantingShift = 90;
         this.alive = true;
     }
-
 
     drawMage () {
        this.ctx.drawImage(this.image, this.shift, 

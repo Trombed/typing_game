@@ -1,5 +1,7 @@
 ## TYPING FANTASY
 ---
+<img src="images/readme/demo.gif" />
+
 Typing Fantasy is a speed typing game inspired by the classic game, The Typing of the Dead developed by Sega. 
 
 Technologies used: Javascript, CSS3, HTML5

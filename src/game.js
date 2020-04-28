@@ -92,20 +92,16 @@ class Game {
 
     animate() {
         this.render = requestAnimationFrame(this.animate.bind(this));
-
         this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
-        // this.drawBG();
         this.drawEnemies();
         this.drawExplosions();
         this.checkOOB();
         this.checkInput();
-        // this.spawnEnemy();
         this.select();
         if (this.health <= 0) {
             this.player.alive = false; 
             this.drawPlayer()
             this.gameOvered();
-
             cancelAnimationFrame(this.render);
         }
         this.drawPlayer();
@@ -200,8 +196,7 @@ class Game {
             if (this.input.value.toUpperCase() === this.enemies[i].word) {
                 this.explosion.push(new Explosion(this.ctx, this.canvas, this.enemies[i].x, this.enemies[i].y ))         
                 this.enemies[i].destroyWord();
-                this.enemies.splice(i,1)
-                
+                this.enemies.splice(i,1)       
                 this.input.value = "";
                 this.wordsEntered += 1;
                 this.updateKill();

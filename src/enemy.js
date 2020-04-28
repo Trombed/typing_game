@@ -9,7 +9,6 @@ class Enemy {
         this.y = this.spawnY();
         this.x = 800;
         this.speedLevel = speed
-
         this.shift = 0;
         this.window = document.createElement("div");
         this.window.classList.add("Word-List-Container", "Enemy-Word");
@@ -81,7 +80,3 @@ class Enemy {
 }
 
 export default Enemy;
-
-// width: 910 / 12 
-// height: 415 / 4
-// 
