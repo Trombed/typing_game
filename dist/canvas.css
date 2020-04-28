@@ -18,6 +18,12 @@
     font-size: 3rem; 
 }
 
+.fab:hover {
+    color: blue;
+}
+
+
+
 .Icons {
     padding-top: 2vh;
     width: 50vw;
