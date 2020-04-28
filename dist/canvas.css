@@ -154,23 +154,25 @@
 }
 
 .Swirl {
-    animation: swirl 1s linear;
+    animation: swirl 0.5s linear;
     animation-iteration-count: 1;
 }
 @keyframes swirl{
 	0% {
+        background-color: black;
         width: 300px;
 		transform: rotate(0deg)
                    rotate(0deg);
         opacity: 100%;
     }
     50% {
-        transform: rotate(360deg);
+        transform: rotate(360deg)
+                    rotate(180deg);
         opacity: 70%;
     }
 	100% {
-        transform: rotate(360deg)
-                   rotate(180deg);
+        transform: rotate(180deg)
+                   rotate(-180deg);
         opacity: 0;
     }
 }
@@ -321,7 +323,7 @@
 
 .Hidden-Container {
     position: absolute;
-    left: 150px;
+    left: 225px;
     top: 50px;
     /* overflow: hidden; */
     display: flex;
@@ -473,7 +475,7 @@
     }
     100% {
         opacity: 100%;
-        left: 130px;
+        left: 200px;
     }
 }
 

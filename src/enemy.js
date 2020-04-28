@@ -15,7 +15,7 @@ class Enemy {
         this.window.classList.add("Word-List-Container", "Enemy-Word");
         this.window.innerHTML = this.word;
         let background = document.getElementById("Game-Background");
-        this.window.style.top = `${this.y-10}px`
+        this.window.style.top = `${this.y-15}px`
         this.window.style.left = `${this.x}px`
         background.append(this.window)
     }
