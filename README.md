@@ -11,7 +11,11 @@ Technologies used: Javascript, CSS3, HTML5
 ## Canvas and DOM Manipulation
 ---
 <img src="images/readme/layers.png" width="600px" />
-Instead of drawing everything into the canvas, I took a different approach of only using canvas for handling sprites and animations only.
+Instead of drawing everything onto the canvas, I took a different approach of only using canvas for handling sprites and animations only. 
+
+Background images are rendered as background-images of a div on a layer beneath the canvas. This approach lets me use CSS animation or translation to perform different effects on background changes.
+
+Each word on top of enemies are a div container that is rendered on top of the canvas. I find this approach makes styling easier and text cleaner. 
 
 
 
