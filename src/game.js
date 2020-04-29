@@ -254,8 +254,9 @@ class Game {
 
     updateWPM() {
         let now = new Date();
-        const diff = now - this.wpmTime
+        const diff = now - this.wpmTime;
         this.wpm = Math.floor(this.wordsEntered / ( (diff / 1000) /  60))
+        console.log(this.wpm)
         this.wpmBox.innerHTML = `${this.wpm}`
     }
 

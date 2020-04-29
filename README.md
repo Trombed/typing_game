@@ -4,6 +4,8 @@
 
 Typing Fantasy is a speed typing game inspired by the classic game, The Typing of the Dead developed by Sega. 
 
+As a swarm of enemy and dragon approaches the black mage, the player must input the 
+
 Technologies used: Javascript, CSS3, HTML5
 
 [Live Site](https://trombed.github.io/typing_game/)
@@ -19,7 +21,7 @@ Instead of drawing everything onto the canvas, I took a different approach of on
 
 Background images are rendered as background-images of a div on a layer beneath the canvas. This approach lets me use CSS animation or translation to perform different effects on background changes.
 
-Each word on top of enemies are a div container that is rendered on top of the canvas. I find this approach makes styling easier and text cleaner. 
+Each word on top of enemies is a div container that is rendered on top of the canvas. I find this approach makes styling easier and text easier to read. 
 
 
 
@@ -29,7 +31,7 @@ CSS Animation Timed Event:
 
 ![LevelUp](/images/readme/level-up.gif)
 
-One aspect I use css animation was for a timer instead of using a setInterval I did this through DOM manipulation and events listeners.
+One aspect I use css for animation was for a timer function instead of using a setInterval, I did this through DOM manipulation and events listeners.
 
 When an animation is needed, the css class is added to the element. Afterward by adding a event listener to look for when the "animation end", it removes the animation class and event listener.
 
