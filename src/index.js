@@ -6,6 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = canvas.getContext("2d");
 
     const input = document.getElementById("user-input")
+
+    const checkPress = (e) => {
+      if (e.keyCode === 32) e.preventDefault();
+    }
+    input.addEventListener("keypress", checkPress) 
+
     const infoBox = document.getElementById("Info")
     const cursor = document.getElementById("cursor")
     const wordBox = document.getElementById("Words")
