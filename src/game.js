@@ -5,7 +5,7 @@ import Explosion from "./explosion";
 
 
 class Game {
-    constructor(ctx, canvas, wordBox, input, infoBox, cursor, hpBox, killsBox, wpmBox) {
+    constructor(ctx, canvas, wordBox, input, infoBox, cursor, hpBox, killsBox, wpmBox, muted) {
         this.ctx = ctx;
         this.canvas = canvas;
         this.input = input;
@@ -13,6 +13,8 @@ class Game {
         this.infoBox = infoBox;
         this.cursor = cursor;
         this.hpBox = hpBox;
+        this.enemySound = new Audio ('./sound/disappear.wav')
+        this.playerSound = new Audio ('./sound/a4swordslash.mp3')
         this.killsBox = killsBox;
         this.wpmBox = wpmBox;
         this.initializeGame = false;
@@ -25,6 +27,7 @@ class Game {
         this.restartGame = this.restartGame.bind(this)
         this.newGame = this.newGame.bind(this)
         this.selector = new Image();
+        this.muted = muted;
         this.selector.src = "./images/static_cursor.png"
         this.spawnTimer = 0;
         this.timer = 1000;
@@ -45,6 +48,9 @@ class Game {
             this.cursor.classList.toggle("hide")
             this.infoBox.classList.toggle("hide")
             this.player.alive = true;
+
+            this.input.addEventListener("keydown", this.deleteWord)
+
             this.wordsEntered = 0;
             this.speed = 1
             this.level = 1;
@@ -73,6 +79,13 @@ class Game {
             )
         }
 
+    }
+
+    deleteWord(e) {
+        if (e.keyCode === 13) {
+            debugger
+            this.value = ""
+        }
     }
 
     rotateBackground() {
@@ -182,6 +195,7 @@ class Game {
                 this.enemies[i].destroyWord();
                 this.enemies.splice(i, 1)
                 this.health -= 1;
+                if (this.muted) this.playerSound.play();
                 this.ctx.fillStyle = 'rgba(255, 0, 0, 0.8)'
                 this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height)
                 this.ctx.fill();
@@ -194,9 +208,17 @@ class Game {
     checkInput() {
         for (let i = 0; i < this.enemies.length; i++) {
             if (this.input.value.toUpperCase() === this.enemies[i].word) {
-                this.explosion.push(new Explosion(this.ctx, this.canvas, this.enemies[i].x, this.enemies[i].y ))         
+                this.explosion.push(new Explosion(this.ctx, this.canvas, this.enemies[i].x, this.enemies[i].y ))   
                 this.enemies[i].destroyWord();
-                this.enemies.splice(i,1)       
+                this.enemies.splice(i,1) 
+                debugger
+                if (this.muted === true)  {
+                    // debugger
+                    // this.playEnemySound(); 
+                    console.log("true")
+                }else {
+                    console.log("false")
+                }
                 this.input.value = "";
                 this.wordsEntered += 1;
                 this.updateKill();
@@ -204,6 +226,15 @@ class Game {
                 this.updateWord();
                 if (this.wordsEntered % 10 === 0) this.updateLevel();
             }
+        }
+    }
+
+    playEnemySound() {
+        if (!this.enemySound.paused || !this.enemySound.currentTime) {
+            this.enemySound.currentTime =  0;
+            this.enemySound.play()
+        } else {
+            this.enemySound.play()
         }
     }
 

@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Tangerine&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="dist/reset.css">
     <link rel="stylesheet" type="text/css" href="dist/canvas.css">
+    <link rel="shortcut icon" href="favicon.ico">
     <script src="https://kit.fontawesome.com/5ae5ed3218.js" crossorigin="anonymous"></script>
     <script  type="application/javascript" src="dist/main.js"></script>
 </head>
@@ -63,9 +64,42 @@
    
         <input id="user-input" class="hide speech-bubble"></input>
         <img src="images/cursor.gif" class="cursor hide" id="cursor" />
-
+        <div class="Volume-Control Word-List-Container" id="Volume">
+            <img src="./images/unmuted.svg" class="Volume-Icon" id="Volume-Icon">   
+        </div>
         <div class="Level-Up" id="Level-Up">
             <img src="./images/levelup.gif" class="Level-Up-Size"/>
+        </div>
+
+        <div class="Help-Box Word-List-Container hide" id="Help-Box">
+            <div class='Help-Box-Box'>
+                <div>
+                <ul class="Help-Box-UL">
+                    <li>
+                        Monsters will come from the right side, enter the word on top of their head to destroy them.
+                    </li>
+                    <li>
+                            Space key is automatically rejected.
+                    </li>
+                    <li>
+                        On the bottom dialog box, the numbers represent the monster  that is closest to the player
+                    </li>
+
+                    
+
+                    <li>
+                        <span class="Red-Mobs">Mobs in red are flying monsters</span>, white are ground soldiers.
+                    </li>
+
+                    <li>
+                        Every 10 kills you will level up, increasing the speed of the monsters and both heal and increase your HP by one.
+                    </li>
+                </ul>
+                </div>
+                <div class="Help-Box-Close Word-List-Container" >
+                    CLOSE
+                </div>
+            </div>
         </div>
     
 </div>
@@ -99,9 +133,15 @@
         </div>
         <div class="Word-List-Container Right-Side" >   
             <div class="Word-List" id="Words">
-                
+           
+
+
             </div>
         </div>
+    </div>
+
+    <div class="How-To Word-List-Container" id="How-To">
+        HOW TO PLAY
     </div>
     <div class="Icons">
         <div>

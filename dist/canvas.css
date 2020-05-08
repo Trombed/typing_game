@@ -512,3 +512,51 @@
     z-index: 10;
     position: absolute;
 }
+
+.How-To {
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color: white;
+    font-size: 20px;
+}
+
+.How-To:hover {
+    color: turquoise;
+}
+
+.Help-Box {
+    padding: 20px;
+    position: absolute;
+    width: 800px;
+    height: 400px;
+    z-index: 100;
+    color: white;
+    /* display: flex; */
+  
+}
+
+.Help-Box-UL li {
+    margin-bottom: 15px;
+}
+
+.Help-Box-Close {
+    cursor: pointer;
+    display: flex;
+    width: 100px;
+    justify-content: center;
+    /* align-items: flex-end; */
+    text-align: center;
+    padding: 20px;
+}
+
+.Help-Box-Box {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.Red-Mobs {
+    color: red;
+}
