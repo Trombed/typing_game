@@ -5,7 +5,7 @@ import Explosion from "./explosion";
 
 
 class Game {
-    constructor(ctx, canvas, wordBox, input, infoBox, cursor, hpBox, killsBox, wpmBox, muted) {
+    constructor(ctx, canvas, wordBox, input, infoBox, cursor, hpBox, killsBox, wpmBox) {
         this.ctx = ctx;
         this.canvas = canvas;
         this.input = input;
@@ -27,7 +27,7 @@ class Game {
         this.restartGame = this.restartGame.bind(this)
         this.newGame = this.newGame.bind(this)
         this.selector = new Image();
-        this.muted = muted;
+
         this.selector.src = "./images/static_cursor.png"
         this.spawnTimer = 0;
         this.timer = 1000;
@@ -38,6 +38,11 @@ class Game {
             3: './images/background3.png',
             4: './images/background4.png'
         }
+
+        this.muted = false
+        this.volumeControl = document.getElementById("Volume")
+        this.volumeControl.addEventListener("click", ()=> this.toggleMusic())
+
     }
 
 
@@ -189,13 +194,28 @@ class Game {
         }
     }
 
+    toggleMusic() {
+       
+        this.muted = !this.muted;
+      
+        switch (this.muted) {
+          case false:
+            this.volumeControl.innerHTML = '<img src="./images/unmuted.svg" class="Volume-Icon" id="Volume-Icon">'
+            break;
+          case true: 
+            this.volumeControl.innerHTML = '<img src="./images/muted.svg" class="Volume-Icon" id="Volume-Icon">'
+            break;
+        }
+    }
+
     checkOOB() {
         for (let i = 0; i < this.enemies.length; i++) {
             if (this.enemies[i].x <= 50) {
                 this.enemies[i].destroyWord();
                 this.enemies.splice(i, 1)
                 this.health -= 1;
-                if (this.muted) this.playerSound.play();
+                
+                if (!this.muted) this.playerSound.play();
                 this.ctx.fillStyle = 'rgba(255, 0, 0, 0.8)'
                 this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height)
                 this.ctx.fill();
@@ -211,14 +231,12 @@ class Game {
                 this.explosion.push(new Explosion(this.ctx, this.canvas, this.enemies[i].x, this.enemies[i].y ))   
                 this.enemies[i].destroyWord();
                 this.enemies.splice(i,1) 
-                debugger
-                if (this.muted === true)  {
-                    // debugger
-                    // this.playEnemySound(); 
-                    console.log("true")
-                }else {
-                    console.log("false")
+           
+              
+                if (!this.muted) { 
+                    this.playEnemySound(); 
                 }
+                
                 this.input.value = "";
                 this.wordsEntered += 1;
                 this.updateKill();
@@ -230,6 +248,7 @@ class Game {
     }
 
     playEnemySound() {
+
         if (!this.enemySound.paused || !this.enemySound.currentTime) {
             this.enemySound.currentTime =  0;
             this.enemySound.play()
