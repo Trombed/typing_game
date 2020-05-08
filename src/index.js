@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const killsBox = document.getElementById("KILLS")
     const wpmBox = document.getElementById("WPM")
     const volumeControl = document.getElementById("Volume")
+    let helpShow = false;
     volumeControl.addEventListener("click", toggleMusic)
     let muted = false
 
@@ -27,9 +28,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     howTo.addEventListener("click", showHelp)
     function showHelp(e) {
-
-      console.log("test")
+      helpShow = !helpShow 
+      
       helpBox.classList.toggle("hide")
+      if (!helpShow) {
+        howTo.innerHTML = "HOW TO PLAY"
+      } else {
+        howTo.innerHTML = "CLOSE MENU"
+      }
     }
 
     
@@ -54,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     function start(e) {
       if (e.code === "Enter") {
+        document.getElementById("Main-Menu").classList.remove("visible")
         let splash = document.getElementById("Splash")
         splash.classList.add("Swirl");
         splash.addEventListener("animationstart", () => {

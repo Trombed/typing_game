@@ -83,7 +83,7 @@ class Game {
 
     deleteWord(e) {
         if (e.keyCode === 13) {
-            debugger
+          
             this.value = ""
         }
     }
@@ -314,6 +314,8 @@ class Game {
 
     gameOvered() {
         this.initializeGame = false;
+        this.input.removeEventListener("keydown", this.deleteWord)
+        
         document.getElementById("Game-Background").innerHTML = ""
         this.cursor.classList.toggle("hide")
         this.input.classList.toggle("hide")

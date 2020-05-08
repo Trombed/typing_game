@@ -516,10 +516,12 @@
 .How-To {
     cursor: pointer;
     margin-top: 10px;
+    width: 200px;
     padding: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: white;
     font-size: 20px;
+    text-align: center;
 }
 
 .How-To:hover {
@@ -527,7 +529,6 @@
 }
 
 .Help-Box {
-    padding: 20px;
     position: absolute;
     width: 800px;
     height: 400px;
@@ -539,24 +540,22 @@
 
 .Help-Box-UL li {
     margin-bottom: 15px;
+    list-style-type: circle;
 }
 
-.Help-Box-Close {
-    cursor: pointer;
-    display: flex;
-    width: 100px;
-    justify-content: center;
-    /* align-items: flex-end; */
-    text-align: center;
-    padding: 20px;
-}
+
 
 .Help-Box-Box {
+    padding: 50px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: flex-end;
 }
 
 .Red-Mobs {
     color: red;
+}
+
+.visible {
+    visibility: hidden;
 }
