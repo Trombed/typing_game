@@ -29,8 +29,9 @@ class Game {
         this.selector = new Image();
 
         this.selector.src = "./images/static_cursor.png"
-        this.spawnTimer = 0;
-        this.timer = 1000;
+     
+        this.timer = 1500;
+        console.log(this.timer)
         this.spawnEnemy = this.spawnEnemy.bind(this)
         this.backgrounds = {
             1: './images/background.png',
@@ -44,6 +45,8 @@ class Game {
         this.volumeControl.addEventListener("click", ()=> this.toggleMusic())
 
     }
+
+  
 
 
     startGame() {
@@ -76,14 +79,27 @@ class Game {
             this.input.value = "";
             this.input.focus();
             let that = this;
-            this.spawnInterval = setInterval( function() {
-                if (document.hasFocus()) {
-                    that.spawnEnemy();
-                }
-                }, that.timer
-            )
+            // this.spawnInterval = setInterval( function() {
+            //     if (document.hasFocus()) {
+            //         that.spawnEnemy();
+            //     }
+            //     }, that.timer
+            // )
+            this.spawnTimer()
         }
 
+    }
+
+    spawnTimer() {
+        this.spawnInterval = setTimeout( () => {
+            if (document.hasFocus()) {
+                
+                this.spawnEnemy()
+                this.spawnTimer()
+            }
+        },this.timer)
+        
+ 
     }
 
     deleteWord(e) {
@@ -268,7 +284,11 @@ class Game {
         this.level += 1;
         this.speed += 0.5;
         this.maxHealth += 1;
-        this.timer -= 10;
+        if (this.timer <= 500) this.timer = 500;
+        else  {
+            this.timer -= 30 * (this.level);
+        }
+       
         this.rotateBackground();
         if (this.health <= this.maxHealth) this.health += 1;
         for(let i = 0; i < this.enemies.length; i++) {
@@ -333,6 +353,7 @@ class Game {
 
     gameOvered() {
         this.initializeGame = false;
+        clearTimeout(this.spawnInterval)
         this.input.removeEventListener("keydown", this.deleteWord)
         
         document.getElementById("Game-Background").innerHTML = ""
