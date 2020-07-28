@@ -23,6 +23,26 @@ Background images are rendered as background-images of a div on a layer beneath 
 
 Each word on top of enemies is a div container that is rendered on top of the canvas. I find this approach makes styling easier and text easier to read. 
 
+## Canvas Animations
+---
+```
+    animate() {
+        this.render = requestAnimationFrame(this.animate.bind(this));
+        this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height);
+        this.drawEnemies();
+        this.drawExplosions();
+        this.checkOOB();
+        this.checkInput();
+        this.select();
+        if (this.health <= 0) {
+            this.player.alive = false; 
+            this.drawPlayer()
+            this.gameOvered();
+            cancelAnimationFrame(this.render);
+        }
+        this.drawPlayer();
+    }
+```
 
 
 
