@@ -25,6 +25,18 @@ Each word on top of enemies is a div container that is rendered on top of the ca
 
 ## Canvas Animations
 ---
+
+Canvas element only handles the rendering of sprites animnations, 
+For each frame that is rendered it will call the following:
+
+A check to see if any word is completed which we will then call a function to have the enemy deleted off the canvas which will call an explosion animation in its place. 
+
+Another check in the rendering is to see if the enemy sprite has crossed over the boundary, which will then decrease the player's life.
+
+A call to the player this.drawPlayer() which will check what kind of animation or pose to be rendered. 
+
+And last but not least a call to see if the game needs to be ended because the player's health has been depleted. 
+
 ```
     animate() {
         this.render = requestAnimationFrame(this.animate.bind(this));
