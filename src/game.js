@@ -98,8 +98,6 @@ class Game {
                 this.spawnTimer()
             }
         },this.timer)
-        
- 
     }
 
     deleteWord(e) {

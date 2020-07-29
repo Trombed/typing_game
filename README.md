@@ -94,4 +94,43 @@ keyframes level {
 }
 ```
 
+## Spawning Monsters: 
+---
+
+Enemies only will spawn if the player has focus on the game, if not the player can infinitely spawn monsters if they are not focused on the game which will increase latency.
+
+
+```
+
+    spawnTimer() {
+        this.spawnInterval = setTimeout( () => {
+            if (document.hasFocus()) {
+                
+                this.spawnEnemy()
+                this.spawnTimer()
+            }
+        },this.timer)
+    }
+```
+
+## Audio:
+---
+ A problem I was having was the explosion sound not playing when there is a current explosion sound already playing.
+
+ To counter this, I did a quick check to see if there is a current instance of a sound playing, if there is reset the explosion sound and play again. 
+
+```
+  playEnemySound() {
+
+        if (!this.enemySound.paused || !this.enemySound.currentTime) {
+            this.enemySound.currentTime =  0;
+            this.enemySound.play()
+        } else {
+            this.enemySound.play()
+        }
+    }
+```
+
+
+
 
